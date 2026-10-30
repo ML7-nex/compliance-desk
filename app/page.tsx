@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AtlasTable from "@/components/AtlasTable";
 import SectorBars from "@/components/SectorBars";
 import TopCuts from "@/components/TopCuts";
@@ -23,6 +24,10 @@ export default function Home() {
           <p className="rise mt-5 max-w-2xl text-lg text-muted" style={{ animationDelay: "120ms" }}>
             Search {entities.length} obligated plants, see how hard each target bites, then model what it costs to comply.
           </p>
+          <div className="rise mt-7 flex flex-wrap gap-3" style={{ animationDelay: "150ms" }}>
+            <a href="#atlas" className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accentink transition hover:brightness-110">Browse the atlas</a>
+            <Link href="/lab" className="rounded-lg border border-line px-5 py-2.5 text-sm font-semibold transition hover:border-accent hover:text-accent">Open Strategy Lab →</Link>
+          </div>
           <dl className="rise mt-9 grid gap-3 sm:grid-cols-3" style={{ animationDelay: "180ms" }}>
             {kpis.map((x) => (
               <div key={x.k} className="card p-5">
@@ -41,7 +46,7 @@ export default function Home() {
           <TopCuts />
         </div>
 
-        <h2 className="mt-14 text-2xl font-semibold tracking-tight">Browse the atlas</h2>
+        <h2 id="atlas" className="mt-14 scroll-mt-20 text-2xl font-semibold tracking-tight">Browse the atlas</h2>
         <p className="mt-1 text-muted">Filter by sector or state. Click a plant for its targets, peers and Strategy Lab.</p>
         <div className="mt-5"><AtlasTable rows={entities} sectors={SECTORS} /></div>
 

@@ -26,7 +26,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </Link>
             <nav className="flex items-center gap-5 text-sm text-muted">
               <Link href="/" className="hover:text-ink">Atlas</Link>
-              <a href="#method" className="hover:text-ink">Method</a>
+              <Link href="/lab" className="hover:text-ink">Strategy Lab</Link>
+              <a href="/#method" className="hover:text-ink">Method</a>
               <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">Beta</span>
             </nav>
           </div>
