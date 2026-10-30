@@ -25,3 +25,10 @@ describe("AI brief guardrail", () => {
     expect(bad).toContain("37");
   });
 });
+
+describe("spelled-out numbers", () => {
+  it("are surfaced instead of silently passing", () => {
+    const facts = buildFacts(plant, inputs);
+    expect(untraceableNumbers("The cut is one point five percent, ranking seventy third.", facts)).toContain("numbers written in words");
+  });
+});

@@ -42,13 +42,34 @@ export function buildFacts(e: EntityRow, inputs: LabInputs) {
   };
 }
 
-export function buildPrompt(facts: ReturnType<typeof buildFacts>) {
+type Facts = ReturnType<typeof buildFacts>;
+
+/** Human-readable fact sheet so the model phrases figures naturally instead of echoing field names. */
+function factSheet(f: Facts) {
+  const fy26 = f.target_fy26 == null ? "none listed" : f.target_fy26;
   return [
-    "You write a short briefing for the CFO of an Indian industrial plant that has a legally binding carbon-intensity target under India's Carbon Credit Trading Scheme.",
-    "Use ONLY the facts in the JSON below. Do not introduce any number, price, company or rule that is not in the JSON. Do not give investment or legal advice.",
-    "Write 110 to 150 words of plain prose in three short paragraphs: (1) how hard the target is and how it compares with peers, (2) what the simulation suggests and why, (3) the main caveats. Mention that lever costs are placeholders. Quote money in rupees crore. No markdown, no bullet points, no headings.",
+    `Plant: ${f.plant}, ${f.state} (${f.registration}), sector ${f.sector}`,
+    `Baseline intensity FY2023-24: ${f.baseline_intensity} tCO2e per tonne`,
+    `Target FY2025-26: ${fy26}; target FY2026-27: ${f.target_fy27}`,
+    `Required cut by FY27: ${f.required_cut_by_fy27_percent} percent`,
+    `Shortfall before any action: ${f.gross_shortfall_fy26_kt} kt in FY26 and ${f.gross_shortfall_fy27_kt} kt in FY27`,
+    `Peer rank for required cut: ${f.peer_rank} of ${f.peer_count} (1 is steepest)`,
+    `Assumed credit price: Rs ${f.assumed_ccc_price_fy26_rupees_per_tonne} per tonne, volatility ${f.assumed_price_volatility_percent} percent, risk aversion ${f.risk_aversion_lambda}`,
+    `Simulated ${f.paths_simulated} price paths`,
+    `Buying everything on the market: expected cost Rs ${f.buy_all_expected_cost_crore} crore, bad-year cost Rs ${f.buy_all_bad_year_p95_cost_crore} crore`,
+    `Optimised plan: expected cost Rs ${f.optimised_expected_cost_crore} crore, bad-year cost Rs ${f.optimised_bad_year_p95_cost_crore} crore, so the bad-year cost falls by Rs ${f.optimised_p95_saving_crore} crore`,
+    `Optimised plan switches on: ${f.optimised_levers.length ? f.optimised_levers.join(", ") : "no abatement levers"}; forward cover ${f.optimised_hedge_percent} percent of the remaining shortfall`,
+    `Caveats: ${f.caveats.join("; ")}`,
+  ].join("\n");
+}
+
+export function buildPrompt(facts: Facts) {
+  return [
+    "You write a short briefing for the CFO of an Indian industrial plant that has a legally binding carbon-intensity target under India's Carbon Credit Trading Scheme (CCTS).",
+    "Rules: use ONLY the facts below. Never introduce a number, price, company or rule that is not listed. Copy figures exactly as written. Give no investment or legal advice.",
+    "Style: 110 to 150 words, three short paragraphs of natural, fluent business English with correct spelling and spacing. (1) how hard the target is and how it compares with peers; (2) what the simulation suggests and why; (3) the main caveats, and say the lever costs are placeholders. Write EVERY number as digits exactly as given (for example 0.5173, 24.1 kt, 73 of 75, FY26, FY27) and never spell numbers out in words. Do not expand or invent abbreviations or institution names; use only names that appear in the facts. Write money as 'Rs 2.5 crore'. Say 'bad-year cost' rather than percentile jargon. Do not use markdown, bullets, headings, field names or underscores.",
     "FACTS:",
-    JSON.stringify(facts),
+    factSheet(facts),
   ].join("\n");
 }
 
@@ -63,7 +84,7 @@ export function untraceableNumbers(text: string, facts: object): string[] {
   };
   walk(facts);
   // fy26/fy27/FY2026 style year tokens and ordinals are not claims
-  const found = (text.replace(/FY\s?\d{2,4}(?:-\d{2})?/gi, " ").replace(/\b(?:CVaR|P)\s?\d{1,2}\b/g, " ").replace(/\b\d{1,2}(?:st|nd|rd|th)\b/gi, " ").match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((m) => m.replace(/,/g, ""));
+  const found = (text.replace(/FY\s?\d{2,4}(?:-\d{2})?/gi, " ").replace(/\b(?:CVaR|P)\s?\d{1,2}\b/gi, " ").replace(/\b\d{1,2}(?:st|nd|rd|th)\b/gi, " ").match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((m) => m.replace(/,/g, ""));
   const bad: string[] = [];
   for (const m of new Set(found)) {
     const n = +m;
@@ -71,6 +92,8 @@ export function untraceableNumbers(text: string, facts: object): string[] {
     const ok = allowed.some((a) => Math.abs(a - n) <= Math.max(0.051, Math.abs(a) * 0.01) || Math.abs(a * 100 - n) < 0.051 || Math.abs(a / 10 - n) < 0.051);
     if (!ok) bad.push(m);
   }
+  // Numbers spelled out in words cannot be checked against the facts, so surface them instead of passing silently.
+  if (/\b(?:zero|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand)\b|\b(?:one|two|three|four|five|six|seven|eight|nine|ten) point\b/i.test(text)) bad.push("numbers written in words");
   return bad;
 }
 
