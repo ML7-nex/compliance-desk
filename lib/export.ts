@@ -17,7 +17,7 @@ export function buildCsv(entity: EntityRow, inputs: LabInputs, twin: TwinState, 
   L.push(row("Plant", entity.name));
   L.push(row("Registration no.", entity.reg));
   L.push(row("Generated", new Date().toISOString().slice(0, 10)));
-  L.push(row("Note", "Illustrative analysis, not advice. Values marked Assumption are uncited placeholders."));
+  L.push(row("Note", "Decision support, not advice. Lever costs cite CEEW (2023); potentials and price are assumptions unless marked User input."));
   L.push("");
   L.push(row("INPUTS", "Value", "Unit", "Source"));
   L.push(row("Output FY26", twin.outputKt[0], "kt", src(twin.outputKt[0] !== def.outputKt[0], "Gazette baseline output")));
@@ -31,12 +31,12 @@ export function buildCsv(entity: EntityRow, inputs: LabInputs, twin: TwinState, 
   L.push(row("Price volatility", inputs.vol, "log-vol", "Scenario assumption"));
   L.push(row("Risk aversion lambda", inputs.lambda, "", "User setting"));
   L.push(row("Discount rate", twin.discountRate, "", src(twin.discountRate !== def.discountRate, "Assumption")));
-  L.push(row("Bank FY26 surplus into FY27", twin.banking ? "yes" : "no", "", "Assumption, pending BEE confirmation"));
+  L.push(row("Bank FY26 surplus into FY27", twin.banking ? "yes" : "no", "", "Allowed under current rules per secondary sources; confirm with CERC/BEE"));
   L.push(row("Simulated paths", lab.s.paths, "", `Seed ${lab.s.seed}`));
   L.push("");
   L.push(row("LEVERS", "Potential kt/yr", "Rs/t", "Ramp FY26", "Ramp FY27", "Delivery mean", "Delivery sd", "Source"));
-  for (const l of twin.levers.filter((x) => x.enabled)) {
-    L.push(row(l.name, l.potentialKt, l.costPerTonne, l.ramp[0], l.ramp[1], l.deliveryMean, l.deliverySd, l.custom ? "User input" : "Assumption (placeholder, uncited)"));
+  for (const l of lab.s.levers) {
+    L.push(row(l.name, Math.round(l.potential / 100) / 10, l.costPerTonne, l.ramp[0], l.ramp[1], l.deliveryMean, l.deliverySd, l.source));
   }
   L.push("");
   L.push(row("RESULTS (NPV, Rs crore)", "Expected", "P5", "P50", "P95", "CVaR95", "Levers on", "Hedge %"));

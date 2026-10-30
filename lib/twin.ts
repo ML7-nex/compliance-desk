@@ -16,6 +16,9 @@ export type TwinLever = {
   deliveryMean: number;
   deliverySd: number;
   custom: boolean;
+  /** Where the default figures come from; replaced by "User input" once the user changes them. */
+  source: string;
+  edited: boolean;
 };
 
 export type TwinState = {
@@ -39,7 +42,7 @@ export function defaultTwin(e: EntityRow): TwinState {
     banking: s.rules.bankSurplusToNextYear,
     levers: s.levers.map((l) => ({
       id: l.id, name: l.name, enabled: true, potentialKt: l.potential / 1000, costPerTonne: l.costPerTonne,
-      ramp: [l.ramp[0], l.ramp[1]], deliveryMean: l.deliveryMean, deliverySd: l.deliverySd, custom: false,
+      ramp: [l.ramp[0], l.ramp[1]], deliveryMean: l.deliveryMean, deliverySd: l.deliverySd, custom: false, source: l.source, edited: false,
     })),
   };
 }
@@ -53,7 +56,7 @@ export function applyTwin(s: Scenario, t: TwinState): Scenario {
     levers: t.levers.filter((l) => l.enabled).map((l) => ({
       id: l.id, name: l.name, potential: l.potentialKt * 1000, costPerTonne: l.costPerTonne, ramp: l.ramp,
       deliveryMean: l.deliveryMean, deliverySd: l.deliverySd,
-      source: l.custom ? "User input" : "Assumption (placeholder, uncited)",
+      source: l.custom || l.edited ? "User input" : l.source,
     })),
   };
 }
@@ -81,6 +84,8 @@ export function sanitizeTwin(raw: unknown, fallback: TwinState): TwinState {
       deliveryMean: num(x.deliveryMean, 0, 1.2, base?.deliveryMean ?? 0.9),
       deliverySd: num(x.deliverySd, 0, 1, base?.deliverySd ?? 0.1),
       custom: base ? !!x.custom : true,
+      source: base?.source ?? "User input",
+      edited: base ? x.edited === true : true,
     };
   });
   // De-duplicate ids so plans refer to exactly one lever each.
@@ -110,5 +115,5 @@ export function leverChanged(def: TwinState, l: TwinLever, field: keyof TwinLeve
 export function newLever(existing: TwinState["levers"]): TwinLever {
   let n = 1;
   while (existing.some((l) => l.id === `custom-${n}`)) n++;
-  return { id: `custom-${n}`, name: `Custom lever ${n}`, enabled: true, potentialKt: 10, costPerTonne: 600, ramp: [0.5, 1], deliveryMean: 0.9, deliverySd: 0.1, custom: true };
+  return { id: `custom-${n}`, name: `Custom lever ${n}`, enabled: true, potentialKt: 10, costPerTonne: 600, ramp: [0.5, 1], deliveryMean: 0.9, deliverySd: 0.1, custom: true, source: "User input", edited: true };
 }

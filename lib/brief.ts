@@ -44,10 +44,10 @@ export function buildFacts(e: EntityRow, inputs: LabInputs, twin?: TwinState) {
       lab.s.levers.length === 0
         ? "No abatement levers are modelled, so the comparison is between buying on the market and forward cover"
         : placeholders > 0
-          ? "Some lever costs and potentials are uncited placeholders"
+          ? "Default lever costs come from a 2023 CEEW study; lever potentials are illustrative until the plant enters its own headroom"
           : "All lever figures were supplied by the user and have not been independently verified",
       "No CCC has traded yet; price is a scenario assumption",
-      "Banking of FY26 surplus into FY27 is " + (twin && !twin.banking ? "switched off" : "assumed, pending BEE confirmation"),
+      "Banking of FY26 surplus into FY27 is " + (twin && !twin.banking ? "switched off" : "modelled as allowed, as current rules are reported to permit"),
     ],
   };
 }

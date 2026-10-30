@@ -87,11 +87,11 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
         <p className="text-sm">{entity.reg} · price ₹{price}/t, volatility {(vol * 100).toFixed(0)}%, λ {lambda.toFixed(1)}</p>
       </div>
       <p className="rounded-lg border border-warn/40 bg-warn/10 p-3 text-sm text-warn">
-        Illustrative. {userLevers === result.s.levers.length && result.s.levers.length > 0 ? "Lever figures are your own. " : "Lever costs and potentials marked assumption are uncited placeholders. "}No CCC price exists yet, so price is a scenario. Not advice.
+        Decision support, not advice. {userLevers === result.s.levers.length && result.s.levers.length > 0 ? "Lever figures are your own. " : "Default lever costs come from the CEEW (2023) cement cost curve; lever potentials are illustrative until you enter your plant's real headroom. "}No CCC has traded: price is a scenario (public analyst commentary expects ₹600–1,200 per tonne early on; no official floor or ceiling).
       </p>
 
       <div className="no-print mt-4 grid gap-3 sm:grid-cols-3">
-        <Slider label="Expected CCC price, FY26" value={price} display={`₹${price}/t`} min={200} max={2500} step={50} onChange={setPrice} />
+        <Slider label="Expected CCC price, FY26 (analyst range ₹600–1,200)" value={price} display={`₹${price}/t`} min={200} max={2500} step={50} onChange={setPrice} />
         <Slider label="Price volatility" value={vol} display={`${(vol * 100).toFixed(0)}%`} min={0.1} max={0.9} step={0.05} onChange={setVol} />
         <Slider label="Risk aversion λ" value={lambda} display={lambda.toFixed(1)} min={0} max={3} step={0.1} onChange={setLambda} />
       </div>
@@ -164,12 +164,12 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
               <tr key={l.id} className="border-t border-line">
                 <td className="px-4 py-2.5">{l.name}</td><td className="px-4 text-right">{(l.potential / 1000).toFixed(1)}</td><td className="px-4 text-right">{l.costPerTonne}</td>
                 <td className="px-4 text-right">{(l.deliveryMean * 100).toFixed(0)}% ± {(l.deliverySd * 100).toFixed(0)}</td>
-                <td className="px-4"><span className={`rounded-full border px-2 py-0.5 text-[11px] ${l.source === "User input" ? "border-accent text-accent" : "border-warn/40 text-warn"}`}>{l.source === "User input" ? "your input" : "assumption"}</span></td>
+                <td className="px-4"><span title={l.source} className={`rounded-full border px-2 py-0.5 text-[11px] ${l.source === "User input" ? "border-accent text-accent" : l.source.startsWith("CEEW") ? "border-blue text-blue" : "border-warn/40 text-warn"}`}>{l.source === "User input" ? "your input" : l.source.startsWith("CEEW") ? "CEEW 2023" : "assumption"}</span></td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p className="px-4 pb-4 pt-2 text-xs text-muted">Targets: gazette. Price, volatility and a 10% resale haircut are assumptions. Banking of FY26 surplus into FY27 is {deferredTwin.banking ? "assumed" : "switched off"}, pending BEE confirmation.</p>
+        <p className="px-4 pb-4 pt-2 text-xs text-muted">Targets: gazette. Lever costs: CEEW (2023), converted at ₹88/USD (hover a badge for the full note); potentials are illustrative. Price, volatility and a 10% resale haircut are assumptions. Banking of FY26 surplus into FY27 is {deferredTwin.banking ? "on (allowed under current rules per secondary sources)" : "switched off"}; borrowing from future years is not allowed. Penalty = 2× the average CCC price.</p>
       </section>
 
       <div className="no-print mt-4 flex flex-wrap gap-3">

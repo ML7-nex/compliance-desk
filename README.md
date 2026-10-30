@@ -16,8 +16,16 @@ Strategy Lab that prices abatement, spot buying and forward cover under an uncer
 
 - `data/entities.json` is built from the gazette tables. Plant names from the October notification are still being
   checked against the PDF. TXTOE127MH has a misprinted baseline in the gazette and is excluded from cut maths.
-- Cement lever costs and potentials are **uncited placeholders**. Every figure carries a source badge.
-- No CCC has traded; prices are scenarios. Banking of FY26 surplus into FY27 is an assumption pending BEE confirmation.
+- Cement lever **costs** come from the CEEW marginal abatement cost curve (Nitturu et al., Oct 2023): efficiency, blended-cement
+  and waste-heat measures have negative cost (modelled at 0), renewable power about USD 20/t (read off a chart, approximate),
+  alternative fuels about USD 42/t; converted at an assumed Rs 88/USD. Lever **potentials are illustrative**: only the plant knows
+  its remaining headroom, so the Lab asks for it. Every figure carries a source badge.
+- No CCC has traded; prices are scenarios. Public analyst commentary (unnamed analysts: IMPRI 28 Jul 2026, Reclimatize 7 Apr 2026)
+  expects Rs 600-1,200/t early on. No official floor or ceiling exists.
+- Rules modelled: penalty = 2x the average CCC price (BEE procedure); banking allowed, borrowing from future years not
+  (secondary source, confirm against the CERC regulations).
+- Independent check: ACEEE (2026) reports 186 cement entities (131 integrated, 55 grinding) with a 7.179 Mt/yr cut by FY2026-27; the atlas
+  gives 186 entities and 7.18 Mt.
 
 ## Run
 

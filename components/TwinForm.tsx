@@ -22,7 +22,7 @@ function Field({ label, value, onChange, edited, step = "any", suffix, source, m
 
 export default function TwinForm({ entity, def, twin, onChange, onReset }: { entity: EntityRow; def: TwinState; twin: TwinState; onChange: (t: TwinState) => void; onReset: () => void }) {
   const set = (patch: Partial<TwinState>) => onChange({ ...twin, ...patch });
-  const setLever = (id: string, patch: Partial<TwinLever>) => onChange({ ...twin, levers: twin.levers.map((l) => (l.id === id ? { ...l, ...patch } : l)) });
+  const setLever = (id: string, patch: Partial<TwinLever>) => onChange({ ...twin, levers: twin.levers.map((l) => (l.id === id ? { ...l, ...patch, edited: l.edited || !(Object.keys(patch).length === 1 && "enabled" in patch) } : l)) });
   const custom = isCustomised(def, twin);
   const unit = entity.unit === "MBBLS" ? "kMBBLS×NRGF" : "kt";
   const pair = (key: "outputKt" | "unabated", i: 0 | 1, v: number) => { const a = [...twin[key]] as [number, number]; a[i] = v; set({ [key]: a } as Partial<TwinState>); };
@@ -56,18 +56,23 @@ export default function TwinForm({ entity, def, twin, onChange, onReset }: { ent
         <Field label="Discount rate" suffix="%" step="0.5" value={twin.discountRate * 100} onChange={(v) => set({ discountRate: v / 100 })} edited={twin.discountRate !== def.discountRate} source="assumption" />
         <label className="flex items-end gap-2 pb-2 text-sm">
           <input type="checkbox" checked={twin.banking} onChange={(e) => set({ banking: e.target.checked })} className="h-4 w-4" />
-          <span>Bank FY26 surplus into FY27 <span className="text-xs text-muted">(unconfirmed rule)</span></span>
+          <span>Bank FY26 surplus into FY27 <span className="text-xs text-muted">(allowed under current rules, secondary source)</span></span>
         </label>
       </div>
 
       <h3 className="mt-6 text-sm font-semibold">Abatement levers</h3>
       <p className="mt-1 text-xs text-muted">
-        {twin.levers.length === 0 ? "No default levers exist for this sector yet. Add your own to compare abatement against buying credits." : "Costs and potentials start as uncited placeholders. Replace them with your own figures."}
+        {twin.levers.length === 0 ? "No default levers exist for this sector yet. Add your own to compare abatement against buying credits." : "Costs come from the CEEW cement cost curve (see source column). Potentials are illustrative: enter your plant's real headroom."}
       </p>
+      {twin.levers.length > 0 && (
+        <p role="note" className="mt-2 rounded-lg border border-warn/40 bg-warn/10 p-2.5 text-xs text-warn">
+          Low-cost levers only help if your plant has not already done them. The potential column is the biggest thing this tool cannot know: set it to what you can still realistically deliver.
+        </p>
+      )}
       <div className="mt-3 overflow-x-auto">
-        <table className="num w-full min-w-[860px] text-sm">
+        <table className="num w-full min-w-[1000px] text-sm">
           <thead className="text-left text-[11px] uppercase tracking-wider text-muted">
-            <tr><th className="py-2 pr-2">On</th><th className="pr-2">Lever</th><th className="pr-2">Potential kt/yr</th><th className="pr-2">₹ per t</th><th className="pr-2">Ramp FY26 %</th><th className="pr-2">Ramp FY27 %</th><th className="pr-2">Delivery %</th><th className="pr-2">± %</th><th /></tr>
+            <tr><th className="py-2 pr-2">On</th><th className="pr-2">Lever</th><th className="pr-2">Potential kt/yr</th><th className="pr-2">₹ per t</th><th className="pr-2">Ramp FY26 %</th><th className="pr-2">Ramp FY27 %</th><th className="pr-2">Delivery %</th><th className="pr-2">± %</th><th className="pr-2">Source</th><th /></tr>
           </thead>
           <tbody>
             {twin.levers.map((l) => {
@@ -93,6 +98,7 @@ export default function TwinForm({ entity, def, twin, onChange, onReset }: { ent
                   {cell("ramp", l.ramp[1], 100, (v) => setLever(l.id, { ramp: [l.ramp[0], Math.min(1, v)] }))}
                   {cell("deliveryMean", l.deliveryMean, 100, (v) => setLever(l.id, { deliveryMean: v }))}
                   {cell("deliverySd", l.deliverySd, 100, (v) => setLever(l.id, { deliverySd: v }))}
+                  <td className="max-w-[16rem] pb-2 pr-2 text-xs text-muted"><span title={l.edited || l.custom ? "User input" : l.source} className="line-clamp-2">{l.edited || l.custom ? "Your input" : l.source}</span></td>
                   <td className="pb-2 text-right">
                     {l.custom && <button onClick={() => onChange({ ...twin, levers: twin.levers.filter((x) => x.id !== l.id) })} className="text-xs text-muted hover:text-danger" aria-label={`Remove ${l.name}`}>Remove</button>}
                   </td>
