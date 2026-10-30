@@ -1,12 +1,15 @@
 import { entities, STATE_NAMES, pct, isUnreliable, type EntityRow } from "@/lib/entities";
 import { computeLab, type LabInputs } from "@/lib/lab";
+import { defaultTwin, isCustomised, type TwinState } from "@/lib/twin";
 
-const crore = (x: number) => Math.round((x / 1e7) * 10) / 10;
+const crore = (x: number) => (Math.abs(x) >= 1e7 ? Math.round((x / 1e7) * 10) / 10 : Math.round((x / 1e7) * 100) / 100);
 const ktRound = (t: number) => Math.round(t / 100) / 10;
 
 /** Every figure the AI may quote. It is computed by the engine; the model only phrases it. */
-export function buildFacts(e: EntityRow, inputs: LabInputs) {
-  const lab = computeLab(e, inputs);
+export function buildFacts(e: EntityRow, inputs: LabInputs, twin?: TwinState) {
+  const lab = computeLab(e, inputs, twin);
+  const customised = twin ? isCustomised(defaultTwin(e), twin) : false;
+  const placeholders = lab.s.levers.filter((l) => l.source !== "User input").length;
   const peers = entities.filter((x) => x.sector === e.sector && x.sub === e.sub && !isUnreliable(x));
   const rank = peers.filter((p) => p.cutPct27 > e.cutPct27).length + 1;
   const [spot, , , opt] = lab.strategies;
@@ -31,13 +34,20 @@ export function buildFacts(e: EntityRow, inputs: LabInputs) {
     optimised_expected_cost_crore: crore(opt.e.stats.mean),
     optimised_bad_year_p95_cost_crore: crore(opt.e.stats.p95),
     optimised_p95_saving_crore: crore(spot.e.stats.p95 - opt.e.stats.p95),
-    optimised_levers: opt.e.plan.levers,
+    optimised_levers: opt.e.plan.levers.map((id) => lab.s.levers.find((l) => l.id === id)?.name ?? id),
     optimised_hedge_percent: Math.round(opt.e.plan.hedge * 100),
     paths_simulated: lab.s.paths,
+    inputs_customised_by_user: customised,
+    lever_count: lab.s.levers.length,
+    levers_with_placeholder_figures: placeholders,
     caveats: [
-      "Lever costs and potentials are uncited placeholders",
+      lab.s.levers.length === 0
+        ? "No abatement levers are modelled, so the comparison is between buying on the market and forward cover"
+        : placeholders > 0
+          ? "Some lever costs and potentials are uncited placeholders"
+          : "All lever figures were supplied by the user and have not been independently verified",
       "No CCC has traded yet; price is a scenario assumption",
-      "Banking of FY26 surplus into FY27 is assumed, pending BEE confirmation",
+      "Banking of FY26 surplus into FY27 is " + (twin && !twin.banking ? "switched off" : "assumed, pending BEE confirmation"),
     ],
   };
 }
@@ -59,6 +69,7 @@ function factSheet(f: Facts) {
     `Buying everything on the market: expected cost Rs ${f.buy_all_expected_cost_crore} crore, bad-year cost Rs ${f.buy_all_bad_year_p95_cost_crore} crore`,
     `Optimised plan: expected cost Rs ${f.optimised_expected_cost_crore} crore, bad-year cost Rs ${f.optimised_bad_year_p95_cost_crore} crore, so the bad-year cost falls by Rs ${f.optimised_p95_saving_crore} crore`,
     `Optimised plan switches on: ${f.optimised_levers.length ? f.optimised_levers.join(", ") : "no abatement levers"}; forward cover ${f.optimised_hedge_percent} percent of the remaining shortfall`,
+    f.inputs_customised_by_user ? "The plant's own inputs (output, intensity and/or lever figures) were entered by the user" : "Inputs are the atlas defaults from the gazette baseline",
     `Caveats: ${f.caveats.join("; ")}`,
   ].join("\n");
 }
@@ -67,7 +78,7 @@ export function buildPrompt(facts: Facts) {
   return [
     "You write a short briefing for the CFO of an Indian industrial plant that has a legally binding carbon-intensity target under India's Carbon Credit Trading Scheme (CCTS).",
     "Rules: use ONLY the facts below. Never introduce a number, price, company or rule that is not listed. Copy figures exactly as written. Give no investment or legal advice.",
-    "Style: 110 to 150 words, three short paragraphs of natural, fluent business English with correct spelling and spacing. (1) how hard the target is and how it compares with peers; (2) what the simulation suggests and why; (3) the main caveats, and say the lever costs are placeholders. Write EVERY number as digits exactly as given (for example 0.5173, 24.1 kt, 73 of 75, FY26, FY27) and never spell numbers out in words. Do not expand or invent abbreviations or institution names; use only names that appear in the facts. Write money as 'Rs 2.5 crore'. Say 'bad-year cost' rather than percentile jargon. Do not use markdown, bullets, headings, field names or underscores.",
+    "Style: 110 to 150 words, three short paragraphs of natural, fluent business English with correct spelling and spacing. (1) how hard the target is and how it compares with peers; (2) what the simulation suggests and why; (3) the main caveats, repeating the lever-figure caveat exactly as listed. Write EVERY number as digits exactly as given (for example 0.5173, 24.1 kt, 73 of 75, FY26, FY27) and never spell numbers out in words. Do not expand or invent abbreviations or institution names; use only names that appear in the facts. Write money as 'Rs 2.5 crore'. Say 'bad-year cost' rather than percentile jargon. Do not use markdown, bullets, headings, field names or underscores.",
     "FACTS:",
     factSheet(facts),
   ].join("\n");

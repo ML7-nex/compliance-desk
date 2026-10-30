@@ -1,5 +1,6 @@
 import { entities, isUnreliable } from "@/lib/entities";
 import { buildFacts, buildPrompt, untraceableNumbers } from "@/lib/brief";
+import { defaultTwin, sanitizeTwin } from "@/lib/twin";
 
 export const maxDuration = 30;
 
@@ -25,14 +26,16 @@ export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ?? "local";
   if (limited(ip)) return Response.json({ error: "Too many requests. Try again in a minute." }, { status: 429 });
 
-  let body: { reg?: string; price?: number; vol?: number; lambda?: number };
+  let body: { reg?: string; price?: number; vol?: number; lambda?: number; twin?: unknown };
   try { body = await request.json(); } catch { return Response.json({ error: "Bad request." }, { status: 400 }); }
 
   const e = entities.find((x) => x.reg === body.reg);
-  if (!e || e.sector !== "Cement" || isUnreliable(e)) return Response.json({ error: "Unknown or unsupported plant." }, { status: 400 });
+  if (!e || isUnreliable(e)) return Response.json({ error: "Unknown or unsupported plant." }, { status: 400 });
 
-  // Facts are recomputed here from the engine; the client cannot supply numbers for the model to repeat.
-  const facts = buildFacts(e, { price: clamp(body.price, 200, 2500, 800), vol: clamp(body.vol, 0.1, 0.9, 0.4), lambda: clamp(body.lambda, 0, 3, 0.5) });
+  // Facts are recomputed here from the engine. The client sends only its inputs (clamped and cleaned);
+  // the model never sees client-supplied text or results.
+  const twin = body.twin ? sanitizeTwin(body.twin, defaultTwin(e)) : undefined;
+  const facts = buildFacts(e, { price: clamp(body.price, 200, 2500, 800), vol: clamp(body.vol, 0.1, 0.9, 0.4), lambda: clamp(body.lambda, 0, 3, 0.5) }, twin);
   const model = process.env.GEMINI_MODEL ?? "gemini-flash-lite-latest";
 
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {

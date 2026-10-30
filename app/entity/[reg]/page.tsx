@@ -59,9 +59,9 @@ export default async function EntityPage({ params }: { params: Promise<{ reg: st
         ))}
       </dl>
 
-      {e.sector === "Cement" && !bad && (
+      {!bad && (
         <Link href={`/lab/${e.reg}`} className="group mt-5 flex items-center justify-between rounded-xl bg-accent p-5 text-accentink transition hover:brightness-110">
-          <span><span className="block text-lg font-semibold">Model this plant in Strategy Lab</span><span className="text-sm opacity-80">How much to abate, buy and hedge, priced across thousands of scenarios</span></span>
+          <span><span className="block text-lg font-semibold">Model this plant in Strategy Lab</span><span className="text-sm opacity-80">Enter your plant&apos;s numbers; see how much to abate, buy and hedge across thousands of price scenarios</span></span>
           <span className="text-2xl transition group-hover:translate-x-1">→</span>
         </Link>
       )}

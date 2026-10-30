@@ -29,7 +29,9 @@ const CEMENT_LEVERS: { id: string; name: string; potentialPct: number; costPerTo
   { id: "re", name: "Renewable power", potentialPct: 0.25, costPerTonne: 1100, ramp: [0.2, 0.8], deliveryMean: 0.8, deliverySd: 0.2 },
 ];
 
+/** Only cement has a default lever library so far; other sectors start with none and the user adds their own. */
 export function levers(e: EntityRow): Lever[] {
+  if (e.sector !== "Cement") return [];
   return CEMENT_LEVERS.map((t) => ({
     id: t.id, name: t.name, potential: t.potentialPct * Math.max((e.base - e.t27) * e.scale, 0.01 * e.baseEmissions), costPerTonne: t.costPerTonne,
     ramp: t.ramp, deliveryMean: t.deliveryMean, deliverySd: t.deliverySd, source: ASSUMPTION,

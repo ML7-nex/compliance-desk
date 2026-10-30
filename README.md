@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Compliance Desk
 
-## Getting Started
+A free atlas of every obligated entity under India's Carbon Credit Trading Scheme (CCTS), plus a plant-level
+Strategy Lab that prices abatement, spot buying and forward cover under an uncertain credit price.
 
-First, run the development server:
+## What is in it
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **CCTS Atlas** (`/`): 490 entities from the MoEFCC gazettes (G.S.R. 739(E), 8 Oct 2025; G.S.R. 25(E), 13 Jan 2026).
+  Baseline, FY26 and FY27 targets, implied tonnes to cut, peer comparison.
+- **Strategy Lab** (`/lab/<registration no.>`): a seeded Monte Carlo engine (`lib/engine`) with a rules config,
+  an exhaustive optimiser (expected cost + λ·CVaR95), an editable plant twin, abatement cost curve, price ranges,
+  sensitivity tornado, CSV export and print view.
+- **AI brief** (`/api/brief`): Gemini phrases numbers the engine computed. A checker flags any figure it cannot trace.
+
+## Data and honesty
+
+- `data/entities.json` is built from the gazette tables. Plant names from the October notification are still being
+  checked against the PDF. TXTOE127MH has a misprinted baseline in the gazette and is excluded from cut maths.
+- Cement lever costs and potentials are **uncited placeholders**. Every figure carries a source badge.
+- No CCC has traded; prices are scenarios. Banking of FY26 surplus into FY27 is an assumption pending BEE confirmation.
+
+## Run
+
+```
+npm install
+npm run dev          # http://localhost:3000
+npm test             # golden scenarios, reproducibility, plant twin, AI guardrail
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For the AI brief set `GEMINI_API_KEY` (and optionally `GEMINI_MODEL`) in `.env.local` locally and in
+Vercel project settings. See `.env.example`. Never commit keys.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Engine notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Same inputs and seed give the same result. Lever cost is paid on planned tonnes; abatement delivered is uncertain.
+Hedge covers a share of expected net shortfall at a forward price. Penalty cap is `penaltyMultiple × mean price`.

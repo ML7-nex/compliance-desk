@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import LabClient from "@/components/LabClient";
+import LabLoader from "@/components/LabLoader";
 import { entities, isUnreliable } from "@/lib/entities";
 
 export function generateStaticParams() {
-  return entities.filter((e) => e.sector === "Cement").map((e) => ({ reg: e.reg }));
+  return entities.filter((e) => !isUnreliable(e)).map((e) => ({ reg: e.reg }));
 }
 
 export default async function LabPage({ params }: { params: Promise<{ reg: string }> }) {
@@ -16,7 +16,7 @@ export default async function LabPage({ params }: { params: Promise<{ reg: strin
       <Link href={`/entity/${e.reg}`} className="text-sm text-muted hover:text-accent">← {e.reg}</Link>
       <p className="eyebrow mt-4 text-accent">Strategy Lab</p>
       <h1 className="mt-1 text-3xl font-semibold tracking-tight">{e.name.split(",").slice(0, 2).join(",")}</h1>
-      <LabClient entity={e} />
+      <LabLoader entity={e} />
     </main>
   );
 }
