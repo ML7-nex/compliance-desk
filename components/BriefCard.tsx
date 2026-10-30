@@ -1,18 +1,21 @@
 "use client";
 import { useState } from "react";
 
-type State = { status: "idle" | "loading" | "done" | "error"; text?: string; untraceable?: string[]; error?: string; model?: string };
+type State = { status: "idle" | "loading" | "done" | "error"; text?: string; untraceable?: string[]; error?: string; model?: string; forKey?: string };
 
 export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: string; price: number; vol: number; lambda: number; twin?: unknown }) {
   const [s, setS] = useState<State>({ status: "idle" });
+  const currentKey = JSON.stringify({ reg, price, vol, lambda, twin });
+  const stale = s.status === "done" && s.forKey !== currentKey;
 
   async function generate() {
     setS({ status: "loading" });
+    const forKey = currentKey;
     try {
       const r = await fetch("/api/brief", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reg, price, vol, lambda, twin }) });
       const j = await r.json();
       if (!r.ok) setS({ status: "error", error: j.error ?? "Something went wrong." });
-      else setS({ status: "done", text: j.text, untraceable: j.untraceable, model: j.model });
+      else setS({ status: "done", text: j.text, untraceable: j.untraceable, model: j.model, forKey });
     } catch {
       setS({ status: "error", error: "Network error." });
     }
@@ -33,7 +36,8 @@ export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: stri
       {s.status === "error" && <p role="alert" className="mt-3 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger">{s.error}</p>}
       {s.status === "done" && (
         <div className="mt-4">
-          <div className="space-y-3 text-[15px] leading-relaxed">{s.text!.split(/\n{2,}/).map((p, i) => <p key={i}>{p}</p>)}</div>
+          {stale && <p role="status" className="mb-3 rounded-lg border border-warn/40 bg-warn/10 p-2.5 text-xs text-warn">You have changed inputs since this brief was written. Click Regenerate so it matches the numbers on screen.</p>}
+          <div className={`space-y-3 text-[15px] leading-relaxed ${stale ? "opacity-50" : ""}`}>{s.text!.split(/\n{2,}/).map((p, i) => <p key={i}>{p}</p>)}</div>
           {s.untraceable && s.untraceable.length > 0
             ? <p role="note" className="mt-3 rounded-lg border border-warn/40 bg-warn/10 p-3 text-xs text-warn">Check before using: the text contains figures not found in the model output ({s.untraceable.join(", ")}).</p>
             : <p className="mt-3 text-xs text-accent">✓ Every figure in this brief traces to the model output.</p>}

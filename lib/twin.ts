@@ -117,3 +117,22 @@ export function newLever(existing: TwinState["levers"]): TwinLever {
   while (existing.some((l) => l.id === `custom-${n}`)) n++;
   return { id: `custom-${n}`, name: `Custom lever ${n}`, enabled: true, potentialKt: 10, costPerTonne: 600, ramp: [0.5, 1], deliveryMean: 0.9, deliverySd: 0.1, custom: true, source: "User input", edited: true };
 }
+
+/** Plain-language list of everything the user changed from the atlas defaults (used by the AI brief and exports). */
+export function changedFields(def: TwinState, t: TwinState): string[] {
+  const out: string[] = [];
+  if (t.outputKt[0] !== def.outputKt[0]) out.push("output for FY26");
+  if (t.outputKt[1] !== def.outputKt[1]) out.push("output for FY27");
+  if (t.unabated[0] !== def.unabated[0]) out.push("unabated intensity for FY26");
+  if (t.unabated[1] !== def.unabated[1]) out.push("unabated intensity for FY27");
+  if (t.discountRate !== def.discountRate) out.push("discount rate");
+  if (t.banking !== def.banking) out.push("banking rule");
+  const fields: [keyof TwinLever, string][] = [["enabled", "inclusion"], ["potentialKt", "potential"], ["costPerTonne", "cost"], ["ramp", "ramp-up"], ["deliveryMean", "delivery rate"], ["deliverySd", "delivery spread"]];
+  for (const l of t.levers) {
+    const b = def.levers.find((x) => x.id === l.id);
+    if (!b) { out.push(`added lever ${l.name}`); continue; }
+    for (const [k, label] of fields) if (JSON.stringify(b[k]) !== JSON.stringify(l[k])) out.push(`${l.name} ${label}`);
+  }
+  for (const b of def.levers) if (!t.levers.some((l) => l.id === b.id)) out.push(`removed lever ${b.name}`);
+  return out;
+}
