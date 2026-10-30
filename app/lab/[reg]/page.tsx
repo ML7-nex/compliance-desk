@@ -13,9 +13,9 @@ export default async function LabPage({ params }: { params: Promise<{ reg: strin
   if (!e || isUnreliable(e)) notFound();
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
-      <Link href={`/entity/${e.reg}`} className="text-sm text-blue-700 hover:underline dark:text-blue-400">← {e.reg}</Link>
-      <h1 className="mt-3 text-2xl font-semibold">Strategy Lab</h1>
-      <p className="text-zinc-600 dark:text-zinc-400">{e.name}</p>
+      <Link href={`/entity/${e.reg}`} className="text-sm text-muted hover:text-accent">← {e.reg}</Link>
+      <p className="eyebrow mt-4 text-accent">Strategy Lab</p>
+      <h1 className="mt-1 text-3xl font-semibold tracking-tight">{e.name.split(",").slice(0, 2).join(",")}</h1>
       <LabClient entity={e} />
     </main>
   );

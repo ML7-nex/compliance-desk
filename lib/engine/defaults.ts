@@ -20,18 +20,18 @@ export const DEFAULT_MARKET: Market = {
 
 const ASSUMPTION = "Assumption (placeholder, uncited). Replace with a cited value before client use.";
 
-/** Cement lever templates. potentialPct = share of baseline emissions removable at full ramp. */
+/** Cement lever templates. potentialPct = share of the plant's FY27 gross shortfall each lever could remove at full ramp (placeholder; sums above 100% so the optimiser must choose). */
 const CEMENT_LEVERS: { id: string; name: string; potentialPct: number; costPerTonne: number; ramp: [number, number]; deliveryMean: number; deliverySd: number }[] = [
-  { id: "clinker", name: "Clinker substitution", potentialPct: 0.015, costPerTonne: 250, ramp: [0.5, 1], deliveryMean: 0.95, deliverySd: 0.1 },
-  { id: "afr", name: "Alternative fuels", potentialPct: 0.015, costPerTonne: 500, ramp: [0.3, 0.8], deliveryMean: 0.85, deliverySd: 0.2 },
-  { id: "efficiency", name: "Energy efficiency", potentialPct: 0.008, costPerTonne: 400, ramp: [0.5, 1], deliveryMean: 0.9, deliverySd: 0.1 },
-  { id: "whr", name: "Waste heat recovery", potentialPct: 0.01, costPerTonne: 900, ramp: [0, 0.7], deliveryMean: 0.85, deliverySd: 0.15 },
-  { id: "re", name: "Renewable power", potentialPct: 0.01, costPerTonne: 1100, ramp: [0.2, 0.8], deliveryMean: 0.8, deliverySd: 0.2 },
+  { id: "clinker", name: "Clinker substitution", potentialPct: 0.45, costPerTonne: 250, ramp: [0.5, 1], deliveryMean: 0.95, deliverySd: 0.1 },
+  { id: "afr", name: "Alternative fuels", potentialPct: 0.4, costPerTonne: 500, ramp: [0.3, 0.8], deliveryMean: 0.85, deliverySd: 0.2 },
+  { id: "efficiency", name: "Energy efficiency", potentialPct: 0.2, costPerTonne: 400, ramp: [0.5, 1], deliveryMean: 0.9, deliverySd: 0.1 },
+  { id: "whr", name: "Waste heat recovery", potentialPct: 0.25, costPerTonne: 900, ramp: [0, 0.7], deliveryMean: 0.85, deliverySd: 0.15 },
+  { id: "re", name: "Renewable power", potentialPct: 0.25, costPerTonne: 1100, ramp: [0.2, 0.8], deliveryMean: 0.8, deliverySd: 0.2 },
 ];
 
 export function levers(e: EntityRow): Lever[] {
   return CEMENT_LEVERS.map((t) => ({
-    id: t.id, name: t.name, potential: t.potentialPct * e.baseEmissions, costPerTonne: t.costPerTonne,
+    id: t.id, name: t.name, potential: t.potentialPct * Math.max((e.base - e.t27) * e.scale, 0.01 * e.baseEmissions), costPerTonne: t.costPerTonne,
     ramp: t.ramp, deliveryMean: t.deliveryMean, deliverySd: t.deliverySd, source: ASSUMPTION,
   }));
 }

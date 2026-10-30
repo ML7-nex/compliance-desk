@@ -1,40 +1,58 @@
 import AtlasTable from "@/components/AtlasTable";
-import { entities, SECTORS, sectorTotals, kt, pct } from "@/lib/entities";
+import SectorBars from "@/components/SectorBars";
+import TopCuts from "@/components/TopCuts";
+import { entities, SECTORS, sectorTotals, pct } from "@/lib/entities";
 
 export default function Home() {
   const totals = sectorTotals();
   const all = totals.reduce((a, t) => ({ b: a.b + t.baseEmissions, c: a.c + t.cut27 }), { b: 0, c: 0 });
-  const tile = "rounded border border-zinc-200 p-4 dark:border-zinc-800";
+  const kpis = [
+    { k: "Obligated entities", v: entities.length.toString(), s: `${SECTORS.length} sectors notified` },
+    { k: "Baseline emissions", v: `${(all.b / 1e6).toFixed(0)} Mt`, s: "FY2023-24, tCO₂e" },
+    { k: "Implied cut by FY27", v: `${(all.c / 1e6).toFixed(1)} Mt`, s: `${pct(all.c / all.b)} of baseline` },
+  ];
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-3xl font-semibold">CCTS Atlas</h1>
-      <p className="mt-2 max-w-3xl text-zinc-600 dark:text-zinc-400">
-        Every obligated entity with a notified emission-intensity target under India&apos;s Carbon Credit Trading Scheme: baseline, FY2025-26 and FY2026-27 targets, and the implied tonnes to cut.
-      </p>
-      <section aria-label="Summary" className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className={tile}><div className="text-sm text-zinc-500">Obligated entities</div><div className="text-2xl font-semibold tabular-nums">{entities.length}</div></div>
-        <div className={tile}><div className="text-sm text-zinc-500">Baseline emissions (FY24)</div><div className="text-2xl font-semibold tabular-nums">{(all.b / 1e6).toFixed(0)} Mt</div></div>
-        <div className={tile}><div className="text-sm text-zinc-500">Implied cut by FY27</div><div className="text-2xl font-semibold tabular-nums">{(all.c / 1e6).toFixed(1)} Mt <span className="text-base font-normal text-zinc-500">({pct(all.c / all.b)})</span></div></div>
-        <div className={tile}><div className="text-sm text-zinc-500">Sectors</div><div className="text-2xl font-semibold tabular-nums">{SECTORS.length}</div></div>
-      </section>
-      <details className="mt-4">
-        <summary className="cursor-pointer text-sm font-medium">Sector table</summary>
-        <table className="mt-2 w-full max-w-2xl text-sm tabular-nums">
-          <thead><tr className="text-left"><th className="py-1">Sector</th><th className="text-right">Entities</th><th className="text-right">Baseline emissions</th><th className="text-right">Cut to FY27</th></tr></thead>
-          <tbody>
-            {totals.map((t) => (
-              <tr key={t.sector} className="border-t border-zinc-200 dark:border-zinc-800">
-                <td className="py-1">{t.sector}</td><td className="text-right">{t.n}</td><td className="text-right">{kt(t.baseEmissions)}</td>
-                <td className="text-right">{kt(t.cut27)} ({pct(t.cut27 / t.baseEmissions)})</td>
-              </tr>
+    <>
+      <section className="relative overflow-hidden border-b border-line">
+        <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
+        <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-14 sm:pt-20">
+          <p className="eyebrow rise text-accent">India · Carbon Credit Trading Scheme</p>
+          <h1 className="rise mt-3 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl" style={{ animationDelay: "60ms" }}>
+            Every legally binding carbon target in India, <span className="text-accent">in one place.</span>
+          </h1>
+          <p className="rise mt-5 max-w-2xl text-lg text-muted" style={{ animationDelay: "120ms" }}>
+            Search {entities.length} obligated plants, see how hard each target bites, then model what it costs to comply.
+          </p>
+          <dl className="rise mt-9 grid gap-3 sm:grid-cols-3" style={{ animationDelay: "180ms" }}>
+            {kpis.map((x) => (
+              <div key={x.k} className="card p-5">
+                <dt className="eyebrow">{x.k}</dt>
+                <dd className="num mt-2 text-4xl font-semibold tracking-tight">{x.v}</dd>
+                <dd className="mt-1 text-sm text-muted">{x.s}</dd>
+              </div>
             ))}
-          </tbody>
-        </table>
-      </details>
-      <div className="mt-6"><AtlasTable rows={entities} sectors={SECTORS} /></div>
-      <footer className="mt-10 text-xs text-zinc-500">
-        Source: MoEFCC gazette G.S.R. 739(E), 8 Oct 2025 and G.S.R. 25(E), 13 Jan 2026. Tonnes to cut = (baseline − FY27 target intensity) × baseline output (× NRGF for refineries). Iron &amp; steel not yet notified. Not advice.
-      </footer>
-    </main>
+          </dl>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <SectorBars totals={totals} />
+          <TopCuts />
+        </div>
+
+        <h2 className="mt-14 text-2xl font-semibold tracking-tight">Browse the atlas</h2>
+        <p className="mt-1 text-muted">Filter by sector or state. Click a plant for its targets, peers and Strategy Lab.</p>
+        <div className="mt-5"><AtlasTable rows={entities} sectors={SECTORS} /></div>
+
+        <section id="method" className="card mt-14 p-6 text-sm text-muted">
+          <div className="eyebrow">Method &amp; sources</div>
+          <p className="mt-2 max-w-3xl">
+            Targets come from MoEFCC gazette G.S.R. 739(E) (8 Oct 2025) and G.S.R. 25(E) (13 Jan 2026). Tonnes to cut = (baseline − FY27 target intensity) × baseline output, times NRGF for refineries.
+            Iron &amp; steel is not yet notified. Plant names from the October notification are under verification against the PDF. Illustrative analysis, not advice.
+          </p>
+        </section>
+      </div>
+    </>
   );
 }

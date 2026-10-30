@@ -74,7 +74,7 @@ export function evaluate(s: Scenario, d: Draws, plan: Plan): Evaluation {
   const gross = grossShortfall(s);
   const on = s.levers.map((l, i) => ({ l, i })).filter(({ l }) => plan.levers.includes(l.id));
   const planned: [number, number] = [0, 0];
-  let leverCost: [number, number] = [0, 0];
+  const leverCost: [number, number] = [0, 0];
   for (const { l } of on) for (const y of [0, 1] as const) {
     planned[y] += l.potential * l.ramp[y];
     leverCost[y] += l.potential * l.ramp[y] * l.costPerTonne;
