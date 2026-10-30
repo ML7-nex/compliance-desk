@@ -1,10 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
 import type { EntityRow } from "@/lib/entities";
-import { scenarioFor } from "@/lib/engine/defaults";
-import { draw, evaluate, grossShortfall } from "@/lib/engine/simulate";
-import { optimise } from "@/lib/engine/optimise";
-import type { Evaluation } from "@/lib/engine/types";
+import { computeLab } from "@/lib/lab";
+import BriefCard from "@/components/BriefCard";
 
 const cr = (x: number) => `₹${(x / 1e7).toLocaleString("en-IN", { maximumFractionDigits: 1 })} cr`;
 // One colour per strategy, colour-blind safe (Okabe–Ito), used everywhere.
@@ -24,20 +22,7 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
   const [vol, setVol] = useState(0.4);
   const [lambda, setLambda] = useState(0.5);
 
-  const result = useMemo(() => {
-    const s = scenarioFor(entity);
-    s.market = { ...s.market, meanPrice: [price, price * 1.125], sigma: [vol * 0.9, vol] };
-    const d = draw(s);
-    const cheap = s.levers.filter((l) => l.costPerTonne < price).map((l) => l.id);
-    const { best } = optimise(s, lambda, undefined, d);
-    const strategies: { name: string; e: Evaluation }[] = [
-      { name: "Buy all on the market", e: evaluate(s, d, { levers: [], hedge: 0 }) },
-      { name: "Abate cheap levers, buy the rest", e: evaluate(s, d, { levers: cheap, hedge: 0 }) },
-      { name: "Abate cheap + hedge 50%", e: evaluate(s, d, { levers: cheap, hedge: 0.5 }) },
-      { name: "Optimised for your risk setting", e: best },
-    ];
-    return { s, strategies, gross: grossShortfall(s) };
-  }, [entity, price, vol, lambda]);
+  const result = useMemo(() => computeLab(entity, { price, vol, lambda }), [entity, price, vol, lambda]);
 
   const all = result.strategies.flatMap((x) => Array.from(x.e.costs));
   const lo = Math.min(...all), hi = Math.max(...all);
@@ -79,6 +64,8 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
           Gross shortfall before action: FY26 {(result.gross[0] / 1000).toFixed(0)} kt, FY27 {(result.gross[1] / 1000).toFixed(0)} kt · {result.s.paths.toLocaleString("en-IN")} paths · seed {result.s.seed}
         </p>
       </div>
+
+      <BriefCard reg={entity.reg} price={price} vol={vol} lambda={lambda} />
 
       <section className="card mt-4 p-5">
         <div className="eyebrow">Risk</div>
