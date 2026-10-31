@@ -32,7 +32,7 @@ export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: stri
           {s.status === "loading" ? "Writing…" : s.status === "done" ? "Regenerate" : "Generate CFO brief"}
         </button>
       </div>
-      <p className="mt-2 text-xs text-muted">The simulation computes every number. The AI only phrases them for your current slider settings, and a checker flags any figure it cannot trace.</p>
+      <p className="mt-2 text-xs text-muted">The simulation computes every number. The AI only phrases them for your current inputs, and a checker flags any figure it cannot trace. Clicking the button sends your current figures to our server and to Google&apos;s Gemini service; nothing is stored by us.</p>
       {s.status === "error" && <p role="alert" className="mt-3 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger">{s.error}</p>}
       {s.status === "done" && (
         <div className="mt-4">

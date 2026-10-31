@@ -32,14 +32,14 @@ export default function TwinForm({ entity, def, twin, onChange, onReset }: { ent
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <div className="eyebrow text-accent">Plant twin</div>
-          <h2 className="mt-1 text-lg font-semibold">Your plant&apos;s numbers</h2>
+          <h2 className="mt-1 text-lg font-semibold">Adjust to your plant&apos;s real numbers <span className="text-sm font-normal text-muted">(optional)</span></h2>
         </div>
         <div className="flex items-center gap-3">
           {custom && <span className="rounded-full border border-accent px-2.5 py-1 text-xs text-accent">customised</span>}
           <button onClick={onReset} disabled={!custom} className="rounded-lg border border-line px-3 py-1.5 text-sm text-muted transition hover:text-ink disabled:opacity-40">Reset to atlas defaults</button>
         </div>
       </div>
-      <p className="mt-2 text-xs text-muted">Starts from the gazette baseline. Change anything to match your plant. Inputs are saved in this browser only and are not uploaded; only the optional AI brief sends the resulting figures to the server.</p>
+      <p className="mt-2 text-xs text-muted">Starts from the gazette baseline, which already gives a first answer. Change anything to match your plant. Inputs are saved in this browser only and are not uploaded; only the optional AI brief sends figures to the server and Google.</p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Field label={`Output FY26 (${unit})`} value={twin.outputKt[0]} onChange={(v) => pair("outputKt", 0, v)} edited={twin.outputKt[0] !== def.outputKt[0]} source="gazette baseline" />

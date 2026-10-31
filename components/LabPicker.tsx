@@ -14,7 +14,7 @@ export default function LabPicker({ plants }: { plants: EntityRow[] }) {
   }, [plants, q, sector]);
   return (
     <div>
-      <input aria-label="Search plants" placeholder="Search a plant, company or state" value={q} onChange={(e) => setQ(e.target.value)}
+      <input aria-label="Search plants" placeholder="Search your company or plant name" value={q} onChange={(e) => setQ(e.target.value)}
         className="w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted" />
       <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
         {["", ...sectors].map((s) => (
