@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { BRAND } from "@/lib/brand";
 import { entities, SECTORS, isUnreliable, kt } from "@/lib/entities";
 import { sectorColor } from "@/lib/theme";
 import { computeLab } from "@/lib/lab";
 import { defaultTwin } from "@/lib/twin";
 import { money } from "@/lib/format";
 
-export const metadata = { title: "Impact & Market | Compliance Desk", description: "How big is the problem, who pays for a solution, and what the tool changes." };
+export const metadata = { title: `Impact & Market | ${BRAND}`, description: "How big is the problem, who pays for a solution, and what the tool changes." };
 
 const PRICES = [600, 800, 1200]; // ₹/t: analyst range (unnamed analysts, IMPRI Jul 2026; Reclimatize Apr 2026); no official price exists
 const crore = (rupees: number) => rupees / 1e7;
@@ -83,12 +84,12 @@ export default function ImpactPage() {
       </section>
 
       <section className={`${card} mt-4`}>
-        <div className="eyebrow">3 · The decision a CFO actually faces</div>
+        <div className="eyebrow">3 · The decision a plant actually faces</div>
         <h2 className="mt-1 text-xl font-semibold">The right answer depends on cheap headroom the plant may or may not have</h2>
         <p className="mt-2 text-sm text-muted">
           CEEW (2023) finds that 13 cement measures (nine efficiency, one raw-material, three clinker-factor) have a <em>negative</em> abatement cost and could cut the sector&apos;s emissions intensity by about 20%.
           The cement targets ask for about {((cement.cut / valid.filter((e) => e.sector === "Cement").reduce((a, r) => a + r.baseEmissions, 0)) * 100).toFixed(1)}% of baseline emissions by FY27.
-          So plants that have <strong className="text-ink">not</strong> yet used those measures can comply cheaply, and plants that already have must buy credits or use costlier levers such as alternative fuels (about USD 42/tCO₂).
+          So plants that have <strong className="text-ink">not</strong> yet used those measures can meet their limit cheaply, and plants that already have must buy credits or use costlier levers such as alternative fuels (about USD 42/tCO₂).
           That is a decision each plant has to price for itself.
         </p>
         <h3 className="mt-5 text-sm font-semibold">Worked example: {ex.name.split(",").slice(0, 2).join(",")} ({ex.reg})</h3>
@@ -118,7 +119,7 @@ export default function ImpactPage() {
         <div className="eyebrow">4 · Commercial potential</div>
         <h2 className="mt-1 text-xl font-semibold">Who pays, and how a fee compares with the exposure</h2>
         <ul className="mt-3 space-y-2 text-sm text-muted">
-          <li><strong className="text-ink">Obligated plants (CFO, head of sustainability):</strong> {valid.length} plants, {cement.n} in cement. The median cement plant must cut {kt(medianCement)} by FY27, an upper-bound exposure of {money(medianCement * 800)} a year at ₹800/t.</li>
+          <li><strong className="text-ink">Obligated plants (finance or sustainability lead):</strong> {valid.length} plants, {cement.n} in cement. The median cement plant must cut {kt(medianCement)} by FY27, an upper-bound exposure of {money(medianCement * 800)} a year at ₹800/t.</li>
           <li><strong className="text-ink">ESG and carbon consultancies:</strong> use the engine to serve more clients per analyst (white-label).</li>
           <li><strong className="text-ink">Banks and lenders:</strong> see a borrower&apos;s carbon exposure from the public atlas before asking for any data.</li>
         </ul>
@@ -133,9 +134,9 @@ export default function ImpactPage() {
         <ul className="mt-3 space-y-2 text-sm text-muted">
           <li><strong className="text-ink">Transparency:</strong> {valid.length} binding targets, previously only in gazette PDFs, are now searchable and traceable to the source page.</li>
           <li><strong className="text-ink">Financial efficiency:</strong> the table above is the measurable claim: expected cost with and without a priced plan, as a function of the plant&apos;s headroom.</li>
-          <li><strong className="text-ink">Emissions:</strong> the tool does not itself cut emissions. The scheme does. The tool helps plants find the cheapest route to comply, which makes ambitious abatement choices easier to justify to a board.</li>
+          <li><strong className="text-ink">Emissions:</strong> the tool does not itself cut emissions. The scheme does. The tool helps plants find the cheapest route to meet their limit, which makes ambitious abatement choices easier to justify to a board.</li>
           <li><strong className="text-ink">Scale path:</strong> the engine is sector-agnostic and already runs for all {valid.length} plants. Cement has a sourced lever library; each further sector needs a sourced lever set. Steel is not yet notified.</li>
-          <li><strong className="text-ink">AI-native:</strong> built with Claude Code (code, tests, data extraction). Gemini turns each result into a plain-English CFO brief, and a checker flags any figure it cannot trace to the simulation.</li>
+          <li><strong className="text-ink">AI-native:</strong> built with Claude Code (code, tests, data extraction). Gemini turns each result into a plain-English brief, and a checker flags any figure it cannot trace to the simulation.</li>
         </ul>
       </section>
 

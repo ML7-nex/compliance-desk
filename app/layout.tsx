@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { BRAND } from "@/lib/brand";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CCTS Atlas | Compliance Desk",
+  title: `Plant Atlas | ${BRAND}`,
   description: "Every obligated entity under India's carbon market, with baseline, targets and implied cuts.",
 };
 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 <rect x="1" y="1" width="22" height="22" rx="6" fill="var(--accent)" />
                 <path d="M5 16l4-5 3 3 6-8" fill="none" stroke="var(--accent-ink)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Compliance Desk
+              {BRAND}
             </Link>
             <nav className="flex items-center gap-5 text-sm text-muted">
               <Link href="/" className="hover:text-ink">Atlas</Link>
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </header>
         <div className="flex-1">{children}</div>
         <footer className="border-t border-line py-6 text-center text-xs text-muted">
-          Compliance Desk · Built on MoEFCC gazette data · Illustrative analysis, not advice
+          {BRAND} · Built on MoEFCC gazette data · Illustrative analysis, not advice
         </footer>
       </body>
     </html>

@@ -106,7 +106,7 @@ function factSheet(f: Facts) {
 
 export function buildPrompt(facts: Facts) {
   return [
-    "You write a short briefing for the CFO of an Indian industrial plant that has a legally binding carbon-intensity target under India's Carbon Credit Trading Scheme (CCTS).",
+    "You write a short briefing for the decision-maker at an Indian industrial plant that has a legally binding carbon-intensity target under India's carbon market rules.",
     "Rules: use ONLY the facts below. Never introduce a number, price, company or rule that is not listed. Copy figures exactly as written. Give no investment or legal advice.",
     "Style: 140 to 190 words, three short paragraphs of natural, fluent business English with correct spelling and spacing. (1) how hard the target is and how it compares with peers; (2) what the simulation suggests and why, naming what the user changed (if anything), which levers are cheaper than the credit price, and the biggest sensitivity; (3) the main caveats, repeating the lever-figure caveat exactly as listed. Write EVERY number as digits exactly as given (for example 0.5173, 24.1 kt, 73 of 75, FY26, FY27) and never spell numbers out in words. Do not expand or invent abbreviations or institution names; use only names that appear in the facts. Write money as 'Rs 2.5 crore'. Say 'bad-year cost' rather than percentile jargon. Do not use markdown, bullets, headings, field names or underscores.",
     "FACTS:",

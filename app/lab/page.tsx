@@ -1,7 +1,8 @@
 import LabPicker from "@/components/LabPicker";
+import { BRAND } from "@/lib/brand";
 import { entities, isUnreliable } from "@/lib/entities";
 
-export const metadata = { title: "Strategy Lab | Compliance Desk" };
+export const metadata = { title: `Strategy Lab | ${BRAND}` };
 
 export default function LabIndex() {
   const plants = entities.filter((e) => !isUnreliable(e)).sort((a, b) => b.cut27 - a.cut27);

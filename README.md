@@ -1,11 +1,11 @@
-# Compliance Desk
+# Cut or Buy
 
-A free atlas of every obligated entity under India's Carbon Credit Trading Scheme (CCTS), plus a plant-level
+A free atlas of every industrial plant with a legal carbon limit in India, plus a plant-level
 Strategy Lab that prices abatement, spot buying and forward cover under an uncertain credit price.
 
 ## What is in it
 
-- **CCTS Atlas** (`/`): 490 entities from the MoEFCC gazettes (G.S.R. 739(E), 8 Oct 2025; G.S.R. 25(E), 13 Jan 2026).
+- **Plant Atlas** (`/`): 490 entities from the MoEFCC gazettes (G.S.R. 739(E), 8 Oct 2025; G.S.R. 25(E), 13 Jan 2026).
   Baseline, FY26 and FY27 targets, implied tonnes to cut, peer comparison.
 - **Strategy Lab** (`/lab/<registration no.>`): a seeded Monte Carlo engine (`lib/engine`) with a rules config,
   an exhaustive optimiser (expected cost + λ·CVaR95), an editable plant twin, abatement cost curve, price ranges,

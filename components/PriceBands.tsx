@@ -5,7 +5,7 @@ const q = (a: Float64Array, p: number) => {
   return s[Math.min(s.length - 1, Math.floor(p * s.length))];
 };
 
-/** Simulated CCC price range per compliance year: P5–P95 band, P25–P75 box, median tick. */
+/** Simulated CCC price range per target year: P5–P95 band, P25–P75 box, median tick. */
 export default function PriceBands({ d, meanPrice }: { d: Draws; meanPrice: [number, number] }) {
   const years = [{ name: "FY26", a: d.price[0] }, { name: "FY27", a: d.price[1] }].map((y, i) => ({
     name: y.name, p5: q(y.a, 0.05), p25: q(y.a, 0.25), p50: q(y.a, 0.5), p75: q(y.a, 0.75), p95: q(y.a, 0.95), mean: meanPrice[i],

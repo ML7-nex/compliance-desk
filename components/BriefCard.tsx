@@ -29,7 +29,7 @@ export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: stri
           <h2 className="mt-1 text-lg font-semibold">Explain this in plain English</h2>
         </div>
         <button onClick={generate} disabled={s.status === "loading"} className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accentink transition hover:brightness-110 disabled:opacity-60">
-          {s.status === "loading" ? "Writing…" : s.status === "done" ? "Regenerate" : "Generate CFO brief"}
+          {s.status === "loading" ? "Writing…" : s.status === "done" ? "Regenerate" : "Generate plain-English brief"}
         </button>
       </div>
       <p className="mt-2 text-xs text-muted">The simulation computes every number. The AI only phrases them for your current inputs, and a checker flags any figure it cannot trace. Clicking the button sends your current figures to our server and to Google&apos;s Gemini service; nothing is stored by us.</p>

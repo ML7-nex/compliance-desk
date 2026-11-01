@@ -1,4 +1,5 @@
 import type { EntityRow } from "@/lib/entities";
+import { BRAND } from "@/lib/brand";
 import type { LabInputs } from "@/lib/lab";
 import type { computeLab } from "@/lib/lab";
 import type { TwinState } from "@/lib/twin";
@@ -13,7 +14,7 @@ const row = (...c: (string | number | null | undefined)[]) => c.map(q).join(",")
 export function buildCsv(entity: EntityRow, inputs: LabInputs, twin: TwinState, def: TwinState, lab: ReturnType<typeof computeLab>) {
   const src = (edited: boolean, base: string) => (edited ? "User input" : base);
   const L: string[] = [];
-  L.push(row("Compliance Desk: Strategy Lab export"));
+  L.push(row(`${BRAND}: Strategy Lab export`));
   L.push(row("Plant", entity.name));
   L.push(row("Registration no.", entity.reg));
   L.push(row("Generated", new Date().toISOString().slice(0, 10)));

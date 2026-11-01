@@ -17,12 +17,12 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-line">
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-14 sm:pt-20">
-          <p className="eyebrow rise text-accent">India · Carbon Credit Trading Scheme</p>
+          <p className="eyebrow rise text-accent">India · legal carbon limits for industry</p>
           <h1 className="rise mt-3 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl" style={{ animationDelay: "60ms" }}>
             Every legally binding carbon target in India, <span className="text-accent">in one place.</span>
           </h1>
           <p className="rise mt-5 max-w-2xl text-lg text-muted" style={{ animationDelay: "120ms" }}>
-            Search {entities.length} obligated plants, see how hard each target bites, then model what it costs to comply.
+            Search {entities.length} obligated plants, see how hard each target bites, then price your options for meeting it.
           </p>
           <div className="rise mt-7 flex flex-wrap gap-3" style={{ animationDelay: "150ms" }}>
             <a href="#atlas" className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accentink transition hover:brightness-110">Browse the atlas</a>
