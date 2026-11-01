@@ -54,7 +54,7 @@ export default function Home() {
           <div className="eyebrow">Method &amp; sources</div>
           <p className="mt-2 max-w-3xl">
             Targets come from MoEFCC gazette G.S.R. 739(E) (8 Oct 2025) and G.S.R. 25(E) (13 Jan 2026). Tonnes to cut = (baseline − FY27 target intensity) × baseline output, times NRGF for refineries.
-            Iron &amp; steel is not yet notified. Plant names from the October notification are under verification against the PDF. Illustrative analysis, not advice.
+            Iron &amp; steel is not yet notified. Plant names and addresses were extracted from the gazette PDFs with two independent parsers and reconciled (page-break splits repaired), but not yet proofread line by line; sub-sector labels for the October notification are unchecked. Illustrative analysis, not advice.
           </p>
         </section>
       </div>

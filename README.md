@@ -14,8 +14,9 @@ Strategy Lab that prices abatement, spot buying and forward cover under an uncer
 
 ## Data and honesty
 
-- `data/entities.json` is built from the gazette tables. Plant names from the October notification are still being
-  checked against the PDF. TXTOE127MH has a misprinted baseline in the gazette and is excluded from cut maths.
+- `data/entities.json` is built from the gazette tables. Plant names and addresses were extracted with two
+  independent parsers and reconciled (54 page-break splits repaired, 3 fixed by hand from the raw text order); they are not yet proofread
+  line by line, and October sub-sector labels are unchecked. TXTOE127MH has a misprinted baseline in the gazette and is excluded from cut maths.
 - Cement lever **costs** come from the CEEW marginal abatement cost curve (Nitturu et al., Oct 2023): efficiency, blended-cement
   and waste-heat measures have negative cost (modelled at 0), renewable power about USD 20/t (read off a chart, approximate),
   alternative fuels about USD 42/t; converted at an assumed Rs 88/USD. Lever **potentials are illustrative**: only the plant knows
