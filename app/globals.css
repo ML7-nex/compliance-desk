@@ -71,3 +71,6 @@ input[type="range"] { accent-color: var(--accent); }
   header, footer, .no-print { display: none !important; }
   .card { break-inside: avoid; box-shadow: none; }
 }
+
+/* Cards nested inside a collapsible panel drop their own frame. */
+.flat .card { border: 0; background: transparent; margin-top: 0; border-radius: 0; }
