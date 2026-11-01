@@ -16,11 +16,11 @@ export default function LabPicker({ plants }: { plants: EntityRow[] }) {
     <div>
       <input aria-label="Search plants" placeholder="Search your company or plant name" value={q} onChange={(e) => setQ(e.target.value)}
         className="w-full rounded-lg border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted" />
-      <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
+      {sectors.length > 1 && <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
         {["", ...sectors].map((s) => (
           <button key={s || "all"} onClick={() => setSector(s)} aria-pressed={sector === s} className={`rounded-full border px-3 py-1 text-xs font-medium transition ${sector === s ? "border-accent bg-accent text-accentink" : "border-line text-muted hover:text-ink"}`}>{s || "All sectors"}</button>
         ))}
-      </div>
+      </div>}
       <ul className="mt-4 grid gap-2 sm:grid-cols-2">
         {list.map((p) => (
           <li key={p.reg}>

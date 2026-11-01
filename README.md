@@ -1,11 +1,11 @@
 # Cut or Buy
 
-A free atlas of every industrial plant with a legal carbon limit in India, plus a plant-level
+A free atlas of every cement plant with a legal carbon limit in India, plus a plant-level
 Strategy Lab that prices abatement, spot buying and forward cover under an uncertain credit price.
 
 ## What is in it
 
-- **Plant Atlas** (`/`): 490 entities from the MoEFCC gazettes (G.S.R. 739(E), 8 Oct 2025; G.S.R. 25(E), 13 Jan 2026).
+- **Cement Atlas** (`/`): 186 cement entities from the MoEFCC gazette (G.S.R. 739(E), 8 Oct 2025). The data file also holds the other 304 notified plants (G.S.R. 25(E) and other sectors); the app is scoped to cement by `FOCUS_SECTOR` in `lib/brand.ts`.
   Baseline, FY26 and FY27 targets, implied tonnes to cut, peer comparison.
 - **Strategy Lab** (`/lab/<registration no.>`): a seeded Monte Carlo engine (`lib/engine`) with a rules config,
   an exhaustive optimiser (expected cost + λ·CVaR95), an editable plant twin, abatement cost curve, price ranges,

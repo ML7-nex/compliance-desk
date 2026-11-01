@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { entities } from "@/lib/entities";
+import { allEntities as entities } from "@/lib/entities";
 import { applyTwin, defaultTwin, isCustomised, sanitizeTwin, newLever } from "@/lib/twin";
 import { scenarioFor } from "@/lib/engine/defaults";
 import { grossShortfall, simulate } from "@/lib/engine/simulate";

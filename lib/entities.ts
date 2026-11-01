@@ -1,4 +1,5 @@
 import raw from "@/data/entities.json";
+import { FOCUS_SECTOR } from "@/lib/brand";
 
 export type Entity = {
   reg: string;
@@ -46,7 +47,9 @@ function enrich(e: Entity): EntityRow {
   };
 }
 
-export const entities: EntityRow[] = (raw as Entity[]).map(enrich);
+export const allEntities: EntityRow[] = (raw as Entity[]).map(enrich);
+/** Entities for the focus sector (cement). Use allEntities for cross-sector work. */
+export const entities: EntityRow[] = allEntities.filter((e) => e.sector === FOCUS_SECTOR);
 
 // TXTOE127MH's baseline is misprinted in the gazette (.94244); exclude it from cut maths.
 export const isUnreliable = (e: Entity) => e.reg === "TXTOE127MH";

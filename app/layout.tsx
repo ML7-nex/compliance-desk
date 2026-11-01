@@ -8,8 +8,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: `Plant Atlas | ${BRAND}`,
-  description: "Every obligated entity under India's carbon market, with baseline, targets and implied cuts.",
+  title: `Cement Atlas | ${BRAND}`,
+  description: "Every cement plant with a legal carbon target in India, with baseline, targets and implied cuts, plus a tool to price the options.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

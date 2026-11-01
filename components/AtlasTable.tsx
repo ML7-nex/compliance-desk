@@ -45,14 +45,14 @@ export default function AtlasTable({ rows, sectors }: { rows: EntityRow[]; secto
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
+      {sectors.length > 1 && <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
         <button className={chip(sector === "")} onClick={() => { setSector(""); reset(); }}>All</button>
         {sectors.map((s) => (
           <button key={s} className={chip(sector === s)} aria-pressed={sector === s} onClick={() => { setSector(sector === s ? "" : s); reset(); }}>
             <i className="mr-1.5 inline-block h-2 w-2 rounded-full align-middle" style={{ background: sectorColor(s) }} />{s}
           </button>
         ))}
-      </div>
+      </div>}
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <input aria-label="Search entities" placeholder="Search name or registration no." value={q} onChange={(e) => { setQ(e.target.value); reset(); }} className={`min-w-64 flex-1 ${field}`} />
         <select aria-label="State" value={state} onChange={(e) => { setState(e.target.value); reset(); }} className={field}>

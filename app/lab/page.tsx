@@ -11,7 +11,7 @@ export default function LabIndex() {
       <p className="eyebrow text-accent">Strategy Lab</p>
       <h1 className="mt-2 text-4xl font-semibold tracking-tight">Find your plant</h1>
       <p className="mt-3 max-w-2xl text-muted">
-        Every plant with a legal emissions target is listed, so finding your plant loads your target and baseline from the gazette automatically. Then adjust the numbers to match your plant and see the cheapest mix of cutting emissions, buying credits and locking in a price. Cement plants start with a sourced lever library; other sectors add their own.
+        Every cement plant with a legal emissions target is listed, so finding your plant loads your target and baseline from the gazette automatically. Then adjust the numbers to match your plant and see the cheapest mix of cutting emissions, buying credits and locking in a price. Each plant starts with a sourced cement lever library.
       </p>
       <div className="mt-6"><LabPicker plants={plants} /></div>
     </main>
