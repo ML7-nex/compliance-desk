@@ -1,0 +1,1352 @@
+46 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+,  -
+#55,  ,
+, 387001,
+
+3.   ,
+i.  2 , ""     , "   ,  2025-26  
+    "    
+ii.  2      :   :
+" 3:    ,  2025-26         
+    2026   2026           
+2026-27       2025-26          ,  
+                     
+2025-26      
+[.. 12/111/2025-]
+ ,  
+  :      , 2025   , ,  II,  3,
+- (i)    ... 739(),  8  , 2025     
+MINISTRY OF ENVIRONMENT FOREST AND CLIMATE CHANGE
+NOTIFICATION
+New Delhi, the 13th January, 2026
+G.S.R. 25(E).-- WHEREAS, the Central Government notified the Carbon Credit Trading Scheme,
+2023 (hereinafter referred to as the said scheme), vide S.O. 2825 (E), dated the 28th June 2023, in exercise
+of the powers conferred by clause (w) of section 14 of the Energy Conservation Act, 2001 (52 of 2001).
+AND WHEREAS, under the compliance of said scheme, the Central Government issued the
+Greenhouse Gases Emission Intensity Target Rules, 2025 vide notification number G.S.R.739(E), dated the
+8th October, 2025 for setting greenhouse gases emission intensity targets of four sectors i.e. Aluminium,
+Cement, Chlor-alkali and Pulp and paper;
+AND WHEREAS, under the compliance of said scheme, the greenhouse gases emission intensity
+targets of four more sectors i.e., Aluminium (Second Aluminium), Petroleum Refinery, Petrochemical and
+Textile are to be notified by the Ministry of Environment, Forest and Climate Change;
+AND WHEREAS, for this purpose, the draft of the Greenhouse Gases Emission Intensity Target
+Amendment Rules, 2025, was published in the Gazette of India, Extraordinary, Part II, Section 3, Sub-section
+(i), vide notification number G.S.R. 234(E), dated the 23rd June 2025, for inviting objections and suggestions
+from all persons;
+AND WHEREAS, all the objections and suggestions have been duly received and considered by the
+Central Government.
+[ II--  3(i)]    :  47
+NOW, THEREFORE, in exercise of the powers conferred by section 3, section 6 and section 25 of
+the Environment (Protection) Act, 1986 (29 of 1986), the Central Government hereby makes the following
+rules further to amend the Greenhouse Gases Emission Intensity Target Rules, 2025, namely:-
+1. (1) These rules may be called the Greenhouse Gases Emission Intensity Target (Amendment) Rules,
+2025.
+(2) They shall come into force on the date of their publication in the Official Gazette.
+2. In the Greenhouse Gases Emission Intensity Target Rules, 2025 (hereinafter referred to as the principal
+rules),-
+(i) The "SCHEDULE" shall be re-numbered as "THE FIRST SCHEDULE" thereof and after THE
+FIRST SCHEDULE, as so numbered, the following Schedule shall be inserted, namely:-
+THE SECOND SCHEDULE
+S.
+No.
+Obligated Entity
+Baseline
+Equivalent
+Major
+Product
+Output
+2023-24
+Baseline
+GHG
+Emission
+Intensity
+2023-24
+GHG Emission Intensity Target
+(5)
+Compliance
+Year
+2025-26
+Compliance
+Year
+2026-27
+(1) (2) (3) (4) (a) (b)
+Name, Address and
+State
+Registration
+Number
+(Tonne)
+(tCO2
+equivalent
+/Tonne of
+equivalent
+product)
+(tCO2 equivalent /
+Tonne of equivalent product)
+Sector: Aluminium
+Sub-Sector - Secondary Aluminium
+1. Hindalco Industries
+Limited, Plot No. 2,
+MIDC Taloja, A.V, Navi
+Mumbai, Dist Raigad,
+Maharashtra-410208
+ALMOE014MH 46845 1.3386 1.3304 1.2800
+2. Hirakud FRP Plant,
+Hindalco Industries Ltd,
+Hirakud, Sambalpur,
+Odisha- 768016
+ALMOE015OD 103292 1.1650 1.1588 1.1208
+3. Hindalco Industries
+Limited - Mouda Works,
+Ramtek Road, Dahali,
+Mouda Dist,
+Maharashtra- 441104
+ALMOE016MH 27265 1.4372 1.4277 1.3696
+48 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+S.
+No
+.
+Obligated Entity
+Baseline
+Crude
+Throughpt
+2023-24
+NRGF
+(Baselin
+e year)
+2023-24
+Baseline GHG
+Emission
+Intensity
+2023-24
+GHG Emission
+Intensity Target
+(6)
+Compliance
+Year
+2025-26
+Compliance
+Year
+2026-27
+(1) (2) (3) (4) (5) (a) (b)
+Name, Address
+and State
+Registration
+Number
+(MBBLS)
+Factor
+(tCO2 equivalent
+/MBBLS/NRGF)
+(tCO2 equivalent /
+MBBLS/NRGF)
+Sector: Petroleum Refinery
+1.
+Bharat Petroleum
+Corporation Ltd -
+Bina Refinery,
+Post BPCL
+Residential
+Complex, Bina,
+Dist. Sagar,
+Madhya Pradesh-
+470124
+REFOE001MP 51418 8.3285 6.6553 6.6172 6.3846
+2.
+Bharat Petroleum
+Corporation Ltd -
+Kochi Refinery,
+Ambalamugal,
+Kochi, Kerala -
+682302
+REFOE002KL 127757 6.9921 4.5652 4.5501 4.4583
+3.
+Bharat Petroleum
+Corporation Ltd -
+Mumbai Refinery,
+Ramakrishna
+Chemburkar
+Marg, Mahul,
+Chembur East,
+Mumbai,
+Maharashtra
+400074
+REFOE003MH 115521 5.0400 4.4095 4.3918 4.2843
+4.
+Chennai
+Petroleum
+Corporation Ltd -
+Manali Refinery,
+Manali, Chennai,
+Tamil Nadu
+600068
+REFOE004TN 85085 6.0477 5.8659 5.8373 5.6635
+5.
+Hindustan
+Petroleum Corp
+Ltd,
+Mumbai Refinery,
+R.C. Marg,
+Mahul, Chembur
+East, Mumbai-
+400074
+Maharashtra
+REFOE005MH 71975 6.1096 5.9125 5.8763 5.6549
+6.
+Hindustan
+Petroleum
+Corporation Ltd-
+Visakh Refinery,
+Malkapuram,
+REFOE006AP 93854 5.0874 6.0704 6.0320 5.7970
+[ II--  3(i)]    :  49
+Visakhapatnam,
+Andhra Pradesh
+530011
+7.
+HPCL - Mittal
+Energy Limited
+(Guru Gobind
+Singh Refinery,
+Kanakwal Urf
+Rattangarh,
+Punjab 151301
+REFOE007PB 90673 8.4513 5.7663 5.7447 5.6135
+8.
+Indian Oil
+Coporation
+Limited - Barauni
+refinery , Barauni-
+Kanpur
+Pipeline,P.O.
+Barauni, CISF
+Colony,
+Begusarai, Bihar
+851114
+REFOE008BR 49463 6.0693 5.8350 5.8086 5.6485
+9.
+Indian Oil
+Coporation
+Limited -
+Bongaigon
+Refinery, BRPL
+Refinery, BGR
+Twp, Dhaligaon
+Pt, Assam 783385
+REFOE009AS 22350 6.0686 7.9764 7.9285 7.6355
+10.
+Indian Oil
+Coporation
+Limited - Gujarat
+Refinery, Jawahar
+Nagar, District -
+Vadodara ,PIN:
+391 320, Gujrat
+REFOE011GJ 109915 6.3714 7.2409 7.1895 6.8744
+11.
+Indian Oil
+Coporation
+Limited - Haldia
+Refinery, Purba
+Medinipur,
+Haldia -721605
+REFOE013WB 58457 6.6304 5.5541 5.5242 5.3415
+12.
+Indian Oil
+Coporation
+Limited - Mathura
+Refinery, Delhi-
+Agra National
+Highway,
+Mathura, Uttar
+Pradesh 281005
+REFOE014UP 67665 5.7430 9.1348 9.0607 8.6049
+13.
+Indian Oil
+Coporation
+Limited - Panipat
+Refinery, Refinery
+Rd, Haryana
+132140
+REFOE015HR 105802 6.3174 7.8403 7.7858 7.4518
+50 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+14.
+Indian oil
+corporation
+Limited
+Digboi Refinery
+(Assam Oil
+Division),
+Tinsukia , Assam-
+786171
+REFOE010AS 5077 7.0643 5.3245 5.2976 5.1336
+15.
+Indian Oil
+Corporation Ltd
+IOCL, Paradeep
+Refinery
+Jagatsinghapur
+Dist, Paradeep,
+Odisha 754142
+REFOE016OD 108991 7.9122 5.6282 5.6076 5.4826
+16.
+Indian Oil
+Corporation Ltd-
+Guwahati
+Refinery,
+Noonmati P.O.,
+Guwahati, Assam-
+781020
+REFOE012AS 7326 5.8483 5.3852 5.3630 5.2279
+17.
+Manglore
+Refinery and
+Petrochemicals
+Ltd, Manglore
+Refinery,
+Kuthethoor P.O.,
+Via Katipalla,
+MANGALORE,
+INDIA - 575 030
+REFOE017KA 120200 7.3600 5.7189 5.6885 5.5029
+18.
+Nayara Refinery
+Site, 39 KM,
+Khambhalia,
+Jamnagar-361305
+Gujarat.
+REFOE018GJ 144171 8.2760 5.1119 5.0887 4.9477
+19.
+Numaligarh
+Refineries Ltd -
+Numaligarh
+Refinery,
+Numaligarh
+Refinery Project,
+Dist.: Golaghat,
+Assam, India,
+PIN- 785699
+REFOE019AS 17671 7.9741 5.4854 5.4637 5.3324
+20.
+Reliance
+Industries Ltd
+(DTA), Village
+Meghhpar/Padana
+, Taluka Lalpur,
+Jamnagar -
+361280, Gujarat -
+India
+REFOE020GJ 241380 8.5035 4.9877 4.9723 4.8793
+21.
+Reliance
+Industries Ltd
+(SEZ), Jamnagar
+SEZ Unit: Village
+REFOE021GJ 258662 11.0441 4.7830 4.7723 4.7079
+[ II--  3(i)]    :  51
+Meghpar/Padana,
+Taluka Lalpur ,
+Jamnagar -
+361140, Gujarat -
+India
+S.
+No.
+Obligated Entity
+Baseline
+Equivalent
+Major
+Product
+Output
+2023-24
+Baseline
+GHG
+Emission
+Intensity
+2023-24
+GHG Emission Intensity
+Target
+(5)
+Compliance
+Year
+2025-26
+Compliance
+Year
+2026-27
+(1) (2) (3) (4) (a) (b)
+Name, Address and State
+Registration
+Number
+(Tonne)
+(tCO2
+equivalent
+/Tonne of
+equivalent
+product)
+(tCO2 equivalent /
+Tonne of equivalent product)
+Sector: Petrochemical units (gas/naphtha crackers or both)
+1.
+Indian Oil Corporation
+Limited Panipat Refinery &
+Petrochemical Complex,
+PO: Panipat Refinery,
+Panipat-132140
+PCOE001HR 2785937 0.8566 0.8523 0.8262
+2.
+Haldia Petrochemicals
+Limited PO Box No-12 PO
+Durgachak, Haldia, Distt.
+Purba Mednipur, West
+Bengal-721602
+PCOE002WB 1530961 0.9112 0.9067 0.8789
+3.
+Reliance Industries Ltd.,
+Vadodara Manufacturing
+Division P.O.
+Petrochemicals Distt:
+Vadodara, Gujarat- 391346
+PCOE003GJ 565262 1.3218 1.3152 1.2749
+4.
+Reliance Industries
+Limited, Hazira
+Manufacturing Division
+Village-Mora, Post-Bhatha,
+Surat-Hazira Road, Dist,
+Surat-394510, Gujarat
+PCOE004GJ 4634895 0.8731 0.8687 0.8421
+5.
+GAIL (India) Limited
+Petrochemical Complex,
+P.O. Pata Distt. Auraiya-
+206241 Uttar Pradesh
+PCOE005UP 865591 1.1451 1.1394 1.1045
+6.
+Reliance Industries
+Limited, Nagothane
+Manufacturing Division,
+P.O Nagothane, Raigad
+District, Maharashtra-
+402125
+PCOE006MH 700115 1.0062 1.0011 0.9705
+7.
+Reliance Industries Ltd.,
+Dahej Manufacturing
+Division P.O- Dahej, Ta:
+PCOE007GJ 3357493 0.6513 0.6480 0.6282
+52 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+Vagra, Distt: Bharuch,
+Gujarat-392130
+8.
+Brahmaputra Cracker and
+Polymer Limited
+Administrative Building,
+Lepetkata, Dibrugarh,
+Assam-786006
+PCOE008AS 294429 1.3303 1.3236 1.2831
+9.
+ONGC Petro additions
+Limited Dahej, Plot No Z/1
+to Z/83, Dahej SEZ, Part 1,
+Taluka Vagra, Gujarat-
+392130
+PCOE009GJ 1783547 1.1378 1.1321 1.0974
+10.
+Reliance Industries
+Limited, Jamnagar
+Manufacturing Division,
+Motikhavdi Reliance
+Greens, Jamnagar, Gujarat-
+361142
+PCOE010GJ 3281702 0.9447 0.9399 0.9112
+11.
+HPCL-Mittal Energy
+Limited - Guru Gobind
+Singh Refinery,
+Phullokhari Village,
+Talwandi Sabo Raman
+, Bathinda, Punjab- 151301
+PCOE011PB 1400791 1.6474 1.6392 1.5890
+S.
+No
+.
+Obligated Entity
+Baseline
+Equivalent
+Major
+Product
+Output
+2023-24
+Baseline
+GHG
+Emission
+Intensity
+2023-24
+GHG Emission Intensity
+Target
+(5)
+Compliance
+Year
+2025-26
+Compliance
+Year
+2026-27
+(1) (2) (3) (4) (a) (b)
+Name, Address and State
+Registration
+Number
+(Tonne)
+(tCO2
+equivalent
+/Tonne of
+equivalent
+product)
+(tCO2 equivalent /
+Tonne of equivalent
+product)
+Sector: Textile
+Sub-sector: Spinning
+1.
+L.S.Mills Ltd., 'B',B unit,Cumbum
+road, Muthu Thevandatty, Theni,
+Dist. Madurai, Tamil Nadu
+TXTOE001TN 13586 0.1667 0.1667 0.1667
+2.
+Madura Coats Private Limited,
+Aladiyur, Papavinasam Mills Post,
+Tirunelveli, Tamil Nadu-627422
+TXTOE002TN 21406 0.4355 0.4352 0.4329
+3.
+Aruppukottai Sri Jaya Vilas Ltd.,
+Cotton Spinning Mills, 'A'
+Unit,Malakadamangalam, 626129,
+Tamil Nadu
+TXTOE003TN 8393 0.7714 0.7703 0.7635
+4.
+Space Textiles Private Limited, SF
+No.-39, N.G.Palayam, Puddur,
+Pirivu, Thekalur, Avinashi,
+Tamilnadu-641037
+TXTOE004TN 8907 1.2484 1.2455 1.2277
+5.
+Sangam (India) Limited, Spinning
+Unit-I, Bhilwara,Rajasthan,311001.
+TXTOE005RJ 36451 1.2765 1.2734 1.2549
+[ II--  3(i)]    :  53
+6.
+Ambika Cotton Mills Limited
+(ACML).Ellappatti road,
+Kanniyapuram, Dist-Dindigul, Tamil
+Nadu 624308
+TXTOE006TN 13544 1.2915 - 1.2693
+7.
+Trident Limited. (Yarn
+Division),Raikot Road,sanghanera,
+Barnala, Punjab,148101,
+TXTOE007PB 19397 5.4436 5.3877 5.0415
+8.
+Bannariamman Spinning Mills
+Limited, Unit-2, Trichy-Dindugal
+National HighWay, Velvarkottai
+Village, Tamilnadu-624803
+TXTOE008TN 13360 1.4850 1.4809 1.4556
+9.
+KPR Mills-II, Sf.No.181,
+Kollupalayam Village, Arasur, Sulur
+Taluk, Coimbatore, Tamilnadu-
+641407
+TXTOE009TN 21723 1.5768 1.5721 1.5437
+10.
+Vardhman Yarns & Threads Ltd-Unit
+-1,PB no-18, Phagwara road,
+Hoshiarpur , 146001, Punjab
+TXTOE010PB 19289 1.9316 1.9246 1.8819
+11.
+Chenab Textile Mills (Sutlej Textile
+and Industries Limited),NH1A ,
+Kathua- 184 102, Jammu and
+Kashmir India TXTOE011JK
+57246 3.2559 3.2359 3.1136
+12.
+M/S. Fiotex Cotspin Pvt.Ltd., S.No.-
+202, At Sanosara, Post.- Rupavati,
+Tal.- Dhrol, Dist.-Jamnagar,360110,
+Gujarat.
+TXTOE012GJ 9682 2.0500 - 1.9939
+13.
+KPR Mills, Neelambur, Coimbatore,
+Tamilnadu,641062
+TXTOE013TN 11249 2.0656 - 2.0087
+14.
+Omax Cotspin Pvt Limited, Survey
+No.842, 843, 845/1, Nr. Petrol Pump,
+Rajsitapur Village, Ta.
+Dhrangadhra,Dist. Surendranagar -
+363320 Gujarat. (INDIA)
+TXTOE014GJ 10928 2.268 - 2.1993
+15.
+KPR Mills-I, Sf.No.275,
+Kittampalayam Village,
+Karumathampatti, Coimbatore,
+Tamilnadu-641 659
+TXTOE015TN 25765 2.269 2.2593 2.2002
+16.
+Suryalatha Spinning
+Mills,Urkondapeta unit,
+Nagarkurnool, Telangana 509320
+TXTOE016TS 12249 2.3573 - 2.2831
+17.
+Suryalakshmi cotton Mills Ltd,
+Rajendranagar,Amangal Vil105 S P
+Road secunderabad,509321,
+Telangana
+TXTOE017TS 8545 2.4583 - 2.3775
+18.
+Vasantha Industries Limited,
+NH-16 Thimmapuram Vill
+Edlapadu mandal, Nr chilakaluripet,
+Guntur Andhra Pradesh
+Pin : 522233
+TXTOE018AP 11247 2.4833 2.4717 2.4009
+19.
+Sudiva Spinners Private. Ltd.,91 KM,
+Stone, N.H.48, Village-Dhunwalia
+Post- Sareri, Bhilwara Rajasthan -
+311024
+TXTOE019RJ 24103 2.4845 - 2.4020
+20.
+DCM TEXTILES (A Unit of DCM
+Nouvelle Limited ) ,PB No-59, Near
+Mela ground, Hisar, Haryana
+TXTOE020HR 23912 2.5093 2.4974 2.4251
+21.
+RSWM Ltd,PB no-28, Kharigram,
+Gulabpura, Bhilwara, Rajasthan
+TXTOE021RJ 40989 2.5187 2.5067 2.4339
+54 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+22.
+S T Cottex Exports Pvt Limited,
+Village Iraq, Machhiwara, Ludhiana,
+Punjab
+TXTOE022PB 43707 2.5747 2.5622 2.4860
+23.
+Aarti International Ltd.,Village Uchi
+Mangli, P.O. Ramgadh, CHD road
+Ludhiana, Punjab
+TXTOE023PB 30025 2.6790 2.6655 2.5830
+24.
+Orient Syntex (Prop: APM Industries
+Ltd.),SP-147, industrial area,
+Bhiwadi, Dist. Alwar, Rajasthan
+TXTOE024RJ 13322 2.6790 2.6655 2.5830
+25.
+Sportking Industries Limited, Vill-
+Jeeda, Bhatinda, Punjab-151201
+TXTOE025PB 50393 2.6925 2.6788 2.5954
+26.
+Deepak Spinners Ltd.,121, Industrial
+area,Baddi, Dist. Solan, 173205,
+Himachal Pradesh
+TXTOE026HP 10973 2.7000 2.6863 2.6025
+27. Reliance Chemotex Industries
+Ltd.,Vill-Kanpur, Udaipur, 313003,
+Rajasthan
+TXTOE027RJ 12957 2.8224 2.8074 2.7157
+28. Sitaram Spinners Pvt ltd,SY
+no,907,Thuniki Khalsa, wargal,
+Siddipet, Telangana, 502336
+TXTOE028TS 13375 2.8433 2.8281 2.7350
+29. Nitin Spinners Limited,16-17 km
+stone, Chittor Road, Hamirgadh,
+Dist-Bhilwara, 311025, Rajasthan
+TXTOE029RJ 55218 2.8553 2.8399 2.7461
+30. Vardhman Spinning & General
+Mills, Chandigarh Road, Ludhiana,
+141011, Punjab
+TXTOE030PB 13572 2.9627 2.9462 2.8450
+31. Sangam (India) Limited, Spining
+Unit-II,Village Sareri, 91 KM Stone,
+N.H. No.79, Bhilwara,
+Rajasthan,311024.
+TXTOE031RJ 29416 2.9823 2.9655 2.8631
+32. RSWM Ltd,PB No-34, Vill-Lodha,
+Banswara, 327001, Rajasthan
+TXTOE032RJ 25298 3.0082 2.9911 2.8869
+33. Arisht Spinning Mills, PB no-1, Sai
+Road, Baddi, Nalagarh, Dist-Solan,
+173205, Himachal Pradesh
+TXTOE033HP 17561 3.0792 3.0613 2.9520
+34. Nahar Spinning Mills Ltd., Village-
+Simrai, andideep, Dist-Raisen,
+464992, Madhya Pradesh
+TXTOE034MP 23454 3.107 3.0888 2.9775
+35. Vardhman Yarn,Plot no-A1-A6,
+New industrial area, Phase 2,
+Satalapur(Mandideep), Dist-Raisen,
+462046, Madhya Pradesh
+TXTOE035MP 64243 3.1582 3.1394 3.0244
+36. Ravali Spinners Pvt ltd,
+Beside N.H-5, road,
+Khandivalli,Peravali Mandal,
+West Godavari, Andhra Pradesh
+Pin: 534330
+TXTOE036AP 9857 3.1711 3.1521 3.0362
+37. Winsome Textile Industries Ltd,1-
+industrial area,Sai road,Baddi,Dist
+Solan, 173205, Himachal Pradesh
+TXTOE037HP 15757 3.1878 3.1686 3.0515
+38. M/S.Nandan Denim Limited, Sub
+Plot No.2 & 3, Vraj Integrated
+Textile Park, Nh No.8, Vill. Bidaj.
+Tal.& Dist.Kheda 387120
+TXTOE038GJ 6784 3.2043 - 3.0666
+39. RSWM Ltd,Rishabhdev, Udaipur
+Dist, 313802, Rajasthan
+TXTOE039RJ 8532 3.2267 3.2071 3.0870
+40. Rajasthan Textiles Mills,Bhawani
+Mandi, Rajasthan 326 502, Rajasthan
+TXTOE040RJ 24274 3.4309 3.4087 3.2727
+[ II--  3(i)]    :  55
+41. M/s Vardhman Spinning Mills, (A
+unit of Vardhman Textile Ltd.), Sai
+Road Baddi, Solan, Himanchal-
+173205
+TXTOE041HP 9661 3.4388 3.4165 3.2799
+42. Anant Spinning Mills (a Unit of
+Vardhman Textile Ltd.),Plot no-1A,
+New Industrial area, Mandideep,
+Dist- Raisen, 462046, Madhya
+Pradesh
+TXTOE042MP 21739 3.4751 3.4523 3.3129
+43. Auro Spinning Mills (A Unit of
+Vardhman Textiles Ltd.),Sai road,
+Baddi, Nalagadh, Dist. Solan,
+173205, Himachal Pradesh
+TXTOE043HP 12606 3.5232 3.4998 3.3564
+44. Sportking synthetics (A unit of
+Sportking India Limited, Kanech,
+near sahnewal, G T Road, Ludhina,
+Punjab 141120
+TXTOE044PB 9514 3.5837 3.5595 3.4110
+45. RSWM Limited, Ringas,SP-1,
+industrial area, Ringas, 332404,
+Rajasthan
+TXTOE045RJ 8831 3.5899 3.5656 3.4167
+46. NAHAR SPINNING MILLS LTD (
+Unit- RISHAB SPINNING MILLS
+JODHAN), VPO-Jodhan, Dist.
+Ludhiana, 142029, Punjab
+TXTOE046PB 15128 3.628 3.6032 3.4510
+47. Nahar Spinning Mills Ltd (Unit II),
+P.O. Dappar, Near Lalru, Dappar,
+Mohal, Punjab-140506
+TXTOE047PB 7074 3.6434 3.6184 3.4650
+48. M/S GTN Engineering (India) Ltd,
+Po-Chitkul, Sangareddy, Telangana-
+502307
+TXTOE048TS 8120 3.6552 - 3.4756
+49. Indo Count Industries Limited,D-1,
+MIDC, Gokil Shirgaon, Kolhapur,
+416234, Maharashtra
+TXTOE049MH 7226 3.6995 3.6737 3.5154
+50. RSWM Ltd Unit Mandpam,PB no-
+13, Chittorgarh road, Mandpum,
+Bhilwara, 311001, Rajasthan
+TXTOE050RJ 13355 3.7416 3.7152 3.5532
+51. Birla Textile Mills (A unit of Sutlej
+Textiles and Industries Limited),Sai
+road,Baddi, Dist-Solan, 173205,
+Himachal Pradesh
+TXTOE051HP 15035 3.7914 3.7643 3.5980
+52. Nahar Fibers (A unit of Nahar
+Spinning Mills Ltd.), Jitwal Kalan,
+Sangur, Punjab-148019
+TXTOE052PB 21671 3.8745 3.8462 3.6724
+53. Shivraj Spinning Mills (P) Ltd (Unit
+II), Kottyur, Agaram Village,
+Sukkampatty, Dindigul, Tamilnadu-
+624709
+TXTOE053TN 8325 3.9556 3.9261 3.7449
+54. Gimatex Industries Pvt. Ltd.,7, KM.
+Mile Stone, Nh-7, Vill-Wani,
+Hinganghat, Wardha, Maharashtra-
+442301
+TXTOE054MH 11347 4.2014 4.1681 3.9634
+55. Alok Industries Limited, Survey No.
+412 Village Sayli Silvassa, Dadra
+Nagar Haveli - 396233
+TXTOE055DN 42031 4.4881 4.4501 4.2161
+56. Nahar Industrial Ent Ltd,Vill-
+Jalalpur, PO-Dappar, Dist-Mohali,
+Punjab
+TXTOE056PB 5206 4.7040 4.6623 4.4049
+56 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+57. Shri Ramalinga Mills Ltd.,A unit,212
+Ramasamy Nagar, Amppukottai,
+626159, Tamil Nadu
+TXTOE057TN 9169 4.7347 4.6924 4.4316
+58. Nahar Industrial Enterprises Ltd.,6th
+Mile stone, Tijara-Alwar road,
+Bhiwadi, 301018, Rajasthan
+TXTOE058RJ 5860 4.8126 4.7689 4.4994
+59. Arihant Spinning Mills ,P.B. no-21,
+Industrial Area, Mlerkotla, 148023,
+Punjab
+TXTOE059PB 12929 4.9056 4.8602 4.5799
+60. Banswara Syntex Ltd.,Banswara ,
+Rajasthan
+TXTOE060RJ 10038 5.9339 5.8675 5.4550
+Sub sector - Processing
+61. BSL LIMITED (Processing
+Division), PB no-16, Mandpum,
+Bhilwara, 311001, Rajasthan
+TXTOE061RJ 11142 0.6307 0.6301 0.6262
+62. Sona Selection India Ltd.,
+Hamirgarh, Chittor Road,
+Bhilwara,311025, Rajasthan
+TXTOE062RJ 16755 1.1814 - 1.1656
+63. Rolex Processors Pvt. Ltd.,13-14km
+stone, Vill-Pur, Gangapur road,
+Bhilwara, 311802, Rajasthan
+TXTOE063RJ 24459 1.5893 1.5853 1.5607
+64. Sona Processors I Ltd,Indra colony,
+Police line, Chittor road, Bhilwara,
+311001, Rajasthan
+TXTOE064RJ 28117 1.9853 1.9790 1.9406
+65. Banswara syntex limited (Processing
+division) Industrail area, Dahod
+Road, Banswara-327001, Rajasthan
+TXTOE065RJ 8248 7.7541 7.6573 7.0536
+66. NOBLE TEX INDUSTRIES
+LTD,Block No. 309, National
+Highway No. 8, Tal. Palsana,
+Baleshwar Village,, Surat - 394315,
+Gujarat, India
+TXTOE066GJ 15635 2.0862 2.0792 2.0368
+67. Kumar Cotton Mills Pvt. Ltd.,SI No-
+108/1, BD, Narol Court, Narol,
+Ahmedabad, 382402, Gujarat
+TXTOE067GJ 27352 2.388 2.3788 2.3231
+68. AK Spintex Ltd,14th km stone,
+Chittorgarh Road, Bhilwara,
+Rajasthan
+TXTOE068RJ 17166 2.5265 2.5162 2.4539
+69. Janki Corp Limited,Mandpiya
+Choraha, Chittor road, Bhilwara,
+Rajasthan
+TXTOE069RJ 21645 2.5469 2.5365 2.4731
+70. Ronak Processors (P) Ltd.,G-138 to
+142, 4th phase, Riico industrial area,
+Bhilwara, Rajasthan
+TXTOE070RJ 9244 2.5664 2.5558 2.4914
+71. TPL Industries Limited 11/12 km,
+Chittor road, Guwardi, Bhilwara,
+311001,Rajasthan
+TXTOE071RJ 14598 2.5909 2.5801 2.5145
+72. Swastika Suitings Ltd,7-14 industrial
+area, Pur road, Bhilwara, Rajasthan
+TXTOE072RJ 7514 2.6033 2.5924 2.5261
+73. KPR Mills Ltd- Processing Mill,
+Perundurai-
+Erode,638052,Tamilnadu
+TXTOE073TN 23229 2.6613 - 2.5806
+74. Kanchan India Ltd.,Pur-road,
+Bhilwara, Rajasthan
+TXTOE074RJ 42435 2.6711 2.6596 2.5898
+75. Ranjan Processors (A Unit of Ranjan
+Polyster Ltd.),11-12 km stone, Vill-
+Guwardi, Chittor road, Bhilwara,
+Rajasthan
+TXTOE075RJ 13618 2.7061 2.6943 2.6227
+[ II--  3(i)]    :  57
+76. S. P. Apparels, Plot.No. Pp-1, Phase
+-II, Sipcot Industrial Growth Centre,
+Perundurai, Erode, Tamil Nadu-638
+052
+TXTOE076TN 5455 2.813 2.8003 2.7228
+77. Sulzer Processors Pvt. Ltd.,Opp-
+railway station, Mandal, Bhilwara,
+Rajasthan
+TXTOE077RJ 15192 2.8411 2.8281 2.7491
+78. Sarvodaya India Limited (Formerly -
+Shree Charbhuja Processors
+Ltd.),Plot no-A-44(45,46,57,58,59),
+Ricco Growth Centre, Swaroopganj,
+Chittor road, Bhilwara, 311001,
+Rajasthan
+TXTOE078RJ 16110 2.9161 2.9024 2.8191
+79. Puja Spintex Private Limited,13 KM
+STONE, Bhilwara, Rajasthan,
+311001.
+TXTOE079RJ 14437 4.1857 - 3.9800
+80. Anant Syntex Limited,PB no-107,
+Vill -Gathila Khera, Chittor road,
+Bhilwara, 311001, Rajasthan
+TXTOE080RJ 15907 3.0381 3.0233 2.9327
+81. Durga Processors Pvt. Ltd,
+Block NO 145, Bardoli Road, Near
+Tantithiya, Tal-Palsana, Surat,
+Gujarat, India,394305
+TXTOE081GJ 28572 3.5389 3.5188 3.3956
+82. Sutlej Textiles and Industries Ltd,
+(Unit-Damanganga Fabrics Process
+division), Village Dahli, Near Bhilad,
+Dist Valsad, 396105
+TXTOE082GJ 10750 3.7187 - 3.5604
+83. Anjani Synthetic ltd, 140 Pirana
+Road, Piplej, Ahmedabad - 382405
+Gujarat, INDIA
+TXTOE083GJ 12278 4.2465 - 4.0396
+84. CREATIVE TEXTILE MILLS PVT
+LTD,PLOT NO. 157/158,GIDC,
+PHASE II,
+VAPI,Valsad,Gujarat,396195
+TXTOE084GJ 10958 4.4312 4.3996 4.2057
+85. SHAHI KNITS PRIVATE
+LIMITED, PLOT.NO.Ff-2, SIPCOT
+INDUSTRIAL GROWTH
+CENTRE, PERUNDURAI, ERODE,
+TAMIL NADU-638 052
+TXTOE085TN 6209 6.3076 6.2436 5.8470
+86. Alok Industry VAPI (Integrated
+Textile Solution),Survey NO
+254/261/268 Vill -Balitha, PO-BOX
+NO 43,VAPI, 396191, Gujarat
+TXTOE086GJ 23633 7.0645 6.9842 6.4848
+87. Jindal Creation Ltd.210/1,
+Chikuwadi, Saijpur-Gopalpur, Narol,
+Ahmedabad-382405 Gujarat.
+TXTOE087GJ 3596 7.3636 - 6.7329
+88. Bindal Silk Mills Private Limited
+Factory: P-216, Kadodara Char
+Rasta, Kadodara, Taluka: Palsana,
+Surat 394327,
+Gujarat, India.
+TXTOE088GJ 5767 7.627 7.5334 6.9496
+89. G. M. Syntex Pvt. Ltd,C-3, MIDC
+,Tarapur,Palghar,Maharashtra,40150
+1.
+TXTOE089MH 5774 8.22 8.1112 7.4311
+90. Chiripal Industries Ltd. (Fabric
+Division)
+Saijpur-Gopalpur,
+Pirana road, Piplej,
+TXTOE090GJ 13116 8.3568 8.2444 7.5410
+58 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+Ahmedabad - 382 405.
+Gujarat, INDIA
+91. Sangam Fashion Pvt Ltd,Plot No A
+37 & 39, Gujarat Eco Textile Park,
+Palsana, Surat - 394315
+TXTOE091GJ 5135 10.8614 10.6715 9.4676
+92. Aaiswarya Dyeing Mills Pvt Ltd,
+Block No.69,72,74,Village- Vareli,
+Surat, Gujarat 394327.
+TXTOE092GJ 14482 12.7311 12.4702 10.7995
+93. Jindal Worldwide Limited,Jindal
+Textiles, 207 Saijpur Gopalpur, On.
+Opp. Lane of Piplaj,
+Narol Octroi Naka, N.H.-8
+Ahmedabad-382 445.
+Gujarat
+TXTOE093GJ 8203 13.0813 12.8058 11.0386
+94. Sangam (India) Ltd., (Processing,
+Flock & Weaving Division), Outside
+Octroi post, Vill-Atun, Chittorgarh
+road, Bhilwara, 311001, Rajasthan
+TXTOE094RJ 17166 3.5213 3.5014 3.3795
+Sub - Sector- Fibre
+95. DNH Spinners Pvt Ltd, Surangi,
+Silvassa, Dadra and Nagar Haveli,
+400054
+TXTOE095DN 222237 0.3927 0.3890 0.2409
+96. Kashi Vishwanath Textile Mill
+Private Limited, Kharakpur Devipura
+Rd, Vaishali Colony, Kashipur,
+Uttarakhand 244714
+TXTOE096UK 62924 0.4499 0.4456 0.4191
+97. Jiwarajka Textile Industries, Kanadi
+Fatak, Naroli, Silvassa, Dadra &
+Nagar Haveli,396235.
+TXTOE097DN 71610 0.4989 - 0.4647
+98. Beekaylon Synthetics Pvt Ltd., Plot
+No.207, 205/1, 205/2, Masat,
+Silvasaa, Dadra & Nagar
+Haveli,400021
+TXTOE098DN 91089 0.615 - 0.5729
+99. Sanathan Textiles Private Limited,
+Survey Plot No. 187/4/1/2 Vill
+Surangi Silvassa Dadra Nagar Haveli
+- 396230
+TXTOE099DN 240218 0.6208 0.6149 0.5783
+100. Madelin Enterprises Private
+Limited.,Plot No.156/2, Saily
+Rakholi Road, Village Saily,
+Silvassa-396230, UT of Dadra &
+Nagar Haveli
+TXTOE100DN 146307 0.6919 - 0.6445
+101. The Bombay Dyeing & Mfg. Co.
+Ltd.,Plot no-1,Industrial area, MIDC,
+Patalganga, Tal. Khalapur, Dist.
+Raigad, 410220, Maharashtra
+TXTOE101MH 141305 0.7679 0.7606 0.7153
+102. Filatex India Limited,Plot No. 2/6 A,
+Village Dahej-2, Industrial Estate
+PM53+F83 GIDC
+,Dahej,Bharuch,Gujarat
+TXTOE102GJ 563992 0.8204 0.8126 0.7642
+103. Filatex India Ltd., Survey
+No.273/1,274 & 45/2, Dadra and
+Nagar Haveli.
+TXTOE103DN 57157 0.8219 - 0.7656
+104. Madelin Enterprises Private Limited,
+Survey No. 267/1 & 273, Umerkuain
+Road, Village Athola (UT of Dadra
+Nagar haveli),Pin-396230.
+TXTOE104DN 105470 0.8664 - 0.8070
+[ II--  3(i)]    :  59
+105. Reliance Industries Limited,
+Hoshiarpur Manufacturing
+Division,chohal Hoshiarpur,punjab
+TXTOE105PB 85003 0.8545 0.8464 0.7959
+106. Reliance Polyesters Limited,Survey
+No.179/1/2 &
+179/1/4,Silvassa,Dadra Nagar
+haveli,396230
+TXTOE106DN 44277 0.999 - 0.9306
+107. Reliance Industries Limited, Hazira
+Manufacturing Division, Polyester
+Section, Surat Gujarat
+TXTOE107GJ 777333 1.0731 1.0626 1.0004
+108. UNIFY TEXTURISERS PVT LTD,
+Village- Karad,P-O Silvassa, Dadra
+& Nagar Haveli,396230
+TXTOE108DN 81309 1.0276 - 0.9572
+109. Wellknown Polyesters ltd,Plot No.
+210/3,215, Dabhel Ind. Co-Op
+Society Ltd., Village Babhel,
+GateNo.4 ,Babhel,Daman,396210
+TXTOE109DN 524557 1.0654 1.0552 0.9924
+110. Sanathan Textiles Pvt Limited, Unit-
+II, Survey No. 320/1/1/2/1P,314/P,&
+315, Village -Surangi, Dadra Nagar
+Haveli.
+TXTOE110DN 160093 1.1197 - 1.0430
+111. Bhilosa Industries Pvt Ltd., Plot No.
+199, Village Naroli , Silvassa, Dadra
+And Nagar Haveli, 396230.
+TXTOE111DN 620844 1.1221 - 1.0452
+112. RAJ RAYON INDUSTRIES
+LTD,SURVEY NO
+177/1/3,VILLAGE -
+SURANGI,silavassa,Dadra & Nagar
+Haveli
+TXTOE112DN 52366 1.2159 1.2043 1.1326
+113. Perfect Filaments Limited,Coastal
+Express Highway,
+Bhimpore,Daman,Dadra and Nagar
+haveli
+TXTOE113DN 24896 1.2538 1.2418 1.1679
+114. Reliance Industries Limited, silvassa
+Manufacturing Division,342,
+Kharadpada,Naroli,Silvassa,Dadra &
+Nagar Haveli
+TXTOE114DN 378169 1.2600 1.2480 1.1736
+115. Bhilosa Industries Pvt Ltd.,Plot No.
+37 & 46/1/1/1, Village Rakholi, Sayli
+Road, Silvassa Dadra and Nagar
+Haveli (UT),396230.
+TXTOE115DN 248041 1.3085 - 1.2188
+116. Indian Acrylics Limited,Village -
+Harkishanpura,
+Sub. Tehsil - Bhawanigarh,
+Distt. Sangrur, Punjab - 148026,
+India
+TXTOE116PB 36194 1.6137 1.5983 1.5031
+117. Reliance Industries Limited,
+Patalganga Manufacturing
+Division,B-4 MIDC industrial area,
+patalganga
+raigad,Maharashtra,410220
+TXTOE117MH 158832 1.8453 1.8277 1.7189
+118. Grasim Industries Limited,Plot No.1
+GIDC, Vilayat Industrial
+Estate,P.O.Vilayat, Taluka
+Vagra,Bharuch,Gujarat 392 012.
+TXTOE118GJ 513934 2.2044 2.1834 2.0534
+119. Birla Cellulosic,Birladam, Kharach,
+Kosamba(RS), Bharuch, 394120,
+Gujarat
+TXTOE119GJ 233723 2.1868 2.1659 2.0370
+60 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+120. Shriram Rayons,Shriram
+Nagar,Kota, 324004, Rajasthan
+TXTOE120RJ 10036 2.2239 2.2027 2.0716
+121. Century Enka Limited,MIDC,
+Bhosari, Dist. Pune, 411026,
+Maharashtra
+TXTOE121MH 23759 2.4212 2.3981 2.2553
+122. Grasilene Division, Grasim
+Industries Limited, Kumarapatnam,
+Haveri, Karnataka,
+TXTOE122KA 101321 2.7010 2.6752 2.5159
+123. PASUPATI ACRYLON
+LTD,PASUPATI ACRYLON LTD.
+KASHIPUR ROAD ,
+THAKURDWARA-244 601
+DISTT.MORADABAD (U.P.)
+TXTOE123UP 35327 3.0175 2.9887 2.8108
+124. Grasim Industries Limited,
+Birlagram Nagda, Ujjain, Madhya
+Pradesh, 456331.
+TXTOE124MP 188930 4.0359 3.9974 3.7594
+125. Vardhman Acrylics Ltd., Jhagadia,
+Jhagadia, Bharuch, Gujarat-393110
+TXTOE125GJ 19712 3.644 3.6092 3.3943
+126. GRASIM INDUSTRIES LIMITED
+(UNIT-INDIAN RAYON),
+VERAVAL, Dist. Junagadh, 362266,
+Gujarat
+TXTOE126GJ 22193 6.2006 6.1414 5.7758
+127. Grasim Industries Limited - Unit:
+Century Rayon,PB No-22, Murbad
+road, Shahad, Dist. Thane, 421103,
+Maharashtra
+TXTOE127MH 26778 .94244 9.3345 8.7787
+Sub- Sector - Composite
+128. Sri Krishna Spinning & Weaving
+Mills Pvt. Ltd. Subramanyapura,
+Bangalore, Karnataka - 560061
+TXTOE128KA 3400 0.0900 - 0.0900
+129. Manomay Tex India Ltd., Aaraji No.
+5,6,7 Near Toll Plaza, Jojro Ka
+Kheda, Gangrar, Chittorgarh,
+Rajasthan 312901
+TXTOE129RJ 25108 2.1680 - 2.0195
+130. Arvind Limited - Denim Business,
+Naroda Road, Ahmedabad, Gujarat-
+380025
+TXTOE130GJ 27977 2.3746 2.3520 2.2119
+131. Maharaja Shree Umaid Mills
+Limited,Pali marwar,306401,
+Rajasthan
+TXTOE131RJ 1475 2.4095 2.3865 2.2445
+132. Super Gold Suitings Pvt. Ltd., Khasra
+No. 538/1 & 637, Village-
+Mandpiya,Bhilwara ,Rajasthan -
+311001
+TXTOE132RJ 10160 2.8503 - 2.6550
+133. Ginni International Ltd., RIICO
+Industrial Area, Delhi Jaipur
+Highway NH 8, Neemrana, Alwar,
+Rajasthan-301705
+TXTOE133RJ 7942 2.8542 2.8270 2.6587
+134. Loyal Textile Mills Ltd.,21/4 Mills
+Street, PB no-1, Kovilpatti, 628501,
+Tamil Nadu
+TXTOE134TN 6051 2.8639 2.8366 2.6677
+135. Shahi Exports Pvt Ltd, Sy No-156,
+KIADB industrial
+area,nidige,shivmogga-577222,
+Karnataka
+TXTOE135KA 60897 2.8917 - 2.6936
+136. Trident Limited (Home Textiles
+Division), Trident Complex,Mansa
+TXTOE136PB 17024 2.9520 2.9238 2.7498
+[ II--  3(i)]    :  61
+road, Vill-Dhaula, Dist-Barnala,
+Punjab,148107
+137. Mohan Spintex India Limited (unit-
+iii),
+Kotha Remalle (post)
+Bapulapadu (mandal)
+Krishna, Andhra Pradesh
+Pin : 521110
+TXTOE137AP 17901 3.3766 3.3444 3.1453
+138. Pee Vee Textiles Ltd.,N.H. 07, Post-
+Jam, Tal- Samudrapur, Dist-Wardha,
+442305, Maharashtra
+TXTOE138MH 33578 3.5445 3.5107 3.3017
+139. M/s Premier Spg & Wvg Mills Pvt
+Ltd, Bagalur, Belathur village,
+Hosur, Krishnagiri, Tamilnadu-635
+124
+TXTOE139TN 2523 3.6031 3.5687 3.3563
+140. Tessitura Monti India Pvt. Ltd., Gate
+No-147, Tamgaon, Sangavade,
+Kohlapur, Maharastra-416202
+TXTOE140MH 4578 3.7210 3.6855 3.4661
+141. Ultra Denim Pvt. Ltd.
+Plot No, C-9, Gujarat Eco Textile
+Park,
+Palsana, NH-8 Dist-Surat,
+Gujrat India - 394315
+TXTOE141GJ 10938 3.9588 3.9210 3.6876
+142. Surya Lakshmi Cotton Mills
+Ltd,Village-Nagardhan, Tal.
+Ramtek, Dist. Nagpur, Maharashtra
+TXTOE142MH 14611 3.9973 3.9592 3.7234
+143. Pratibha Syntex Limited, PO:
+Pithampur, DIST Dhar, City Indore,
+MADYA PRADESH-454774
+TXTOE143MP 2682 4.0481 4.0095 3.7708
+144. Welspun Living Limited, Welspun
+City, Servey No.666,675,700,775,
+Anjar Bhachau Road, P.B.No.21,
+Anjar (Kutch), Kutch, Gujarat-
+370110
+TXTOE144GJ 105339 5.8991 5.8428 5.4949
+145. Maral Overseas Ltd, A. B. Road,
+Khalbujurg,Maral
+Sarovar,Khargone,Madhya Pradesh-
+451660
+TXTOE145MP 5049 4.3378 4.2964 4.0407
+146. Anubha industries
+Plot No - 369,371,377 - NH8,
+Village & Taluka Palsana,
+Surat - 394315
+Gujarat - India
+TXTOE146GJ 9103 4.6948 4.6500 4.3732
+147. BMD (P) Ltd., Mordi, Banswara,
+Rajasthan-327001
+TXTOE147RJ 4075 5.3265 5.2757 4.9616
+148. NSL TEXTILES LTD. Edlapadu
+Guntur
+Andhra Pradesh
+Pin : 522233
+TXTOE148AP 3526 6.5780 6.5152 6.1273
+149. RSWM LTD. (Knitting Div.),LNJ
+Nagar, Mordi, PB no-28, Dist-
+Banswara, 327001, Rajasthan
+TXTOE149RJ 2395 6.7669 6.7023 6.3033
+150. Nitin Spinners Ltd., Chittor-Kota NH
+27, PO Begun, Village Bhamwaria,
+Dist-chittorgarh, Rajasthan,312023.
+TXTOE150RJ 9803 6.9453 - 6.4695
+151. Himatsingka Linnens ,Plot No-1,
+KIADB Ind. Area, Gorur Road,
+Hanumanthoura Post, Hassan
+,Karnataka, 573201
+TXTOE151KA 36653 6.9585 - 6.4818
+62 THE GAZETTE OF INDIA : EXTRAORDINARY [PART II--SEC. 3(i)]
+152. Raymond Zambaiti Limited ,Plot no-
+T1, Kagal Hatkanagle, 5 star, MIDC,
+Kasaba Sangaon, Dist-Kolhapur,
+416216, Maharashtra
+TXTOE152MH 7309 7.2040 7.1353 6.7105
+153. Raymond Lifestyle Limited, NH-08,
+Khadki, Udvada, Taluka Pardi,
+Valsad, Gujurat-396185
+TXTOE153GJ 9828 7.3276 7.2577 6.8256
+154. RSWM LIMITED
+(LNJ- DENIM PLANT)
+,LNJ Nagar,
+Mordi,P.B 28 Dist-
+Banswara,Rajasthan - 327001
+TXTOE154RJ 19777 7.5343 - 7.0182
+155. Raymond UCO Denim Pvt. Ltd,Plot-
+C1, MIDC, Lohara,Yavatmal,
+445001, Maharashtra
+TXTOE155MH 14809 7.6936 7.6202 7.1666
+156. Vardhman Fabrics ( Unit of
+Vardhman Textiles Limited),Vill-
+Plikarar Talpura Rehti road,Tehsil-
+Budhni,Dist. Sehore, 466441,
+Madhya Pradesh
+TXTOE156MP 26968 7.7067 7.6332 7.1787
+157. Valli Textile Mills,A unit of Loyal
+Textile Mills Ltd.,
+N.VenkateshwaraPuram, Post-
+Sathur, 626205, Tamil Nadu
+TXTOE157TN 3879 7.8719 7.7968 7.3327
+158. Donear Industries Ltd,Village-
+Jolwa,Tal-Palsana,Dist-
+Surat,Gujarat,394304.
+TXTOE158GJ 8906 8.1790 8.1010 7.6186
+159. Trident Limited, Home Textile
+Division,
+Budhni,Budhni,Sehore,Madhya
+Pradesh-466445
+TXTOE159MP 46662 8.1934 8.1152 7.6321
+160. Indo Count Industries Ltd. survey no.
+191/192 Mahala falla village, dist.
+Bhilad, Gujarat 396105.
+TXTOE160GJ 13934 8.4887 - 7.9072
+161. Arvind Products Ltd. (Div. Ankur
+Textile),Outside Raipur Gate,
+Ahmedabad, 380022, Gujarat
+TXTOE161GJ 4525 8.8087 8.7246 8.2052
+162. Bhaskar Industries Pvt Ltd, Plot no.
+15 - 16, Sector D, Industrial Area,
+Mandideep, Raisen, Madhya
+Pradesh-462046
+TXTOE162MP 16849 9.1124 9.0255 8.4881
+163. Welspun Living Limited., Vapi,
+survey No. 76, Village and
+P.O.Morai,Village & P.O.
+Morai,Valsad,Gujarat-396191
+TXTOE163GJ 29547 9.8505 9.7565 9.1756
+164. Grasim Industries Limited Unit -
+Jayashree Textiles., Rishra, Kolkata,
+Prabhasnagar, Hooghly, West
+Bengal-712249
+TXTOE164WB 2457 10.0724 9.9763 9.3823
+165. RSWM Limited, 110 KM Stone
+Delhi Mathura Road, Chhata,
+Mathura, Uttar Pradesh 281401
+TXTOE165UP 2633 10.4900 10.3899 9.7713
+166. NSL Textiles Limited,
+Inkollu,post and mandal
+Prakasam,Guntur, Andhra Pradesh
+Pin : 523167
+TXTOE166AP 2528 11.2958 11.1880 10.5219
+167. M/s Grasim Bhiwani Textiles Ltd.
+Unit: Bhiwani Textile Mills and
+TXTOE167HR 5126 13.1303 13.0050 12.2307
+[ II--  3(i)]    :  63
+Elegant Spinners,PB No-#4, BTM
+road, Bhiwani, 127021, Haryana
+168. Reliance Industries Limited, Textile
+Division, Naroda, Naroda,
+Ahmedabad, Gujarat-382330
+TXTOE168GJ 4307 13.9924 13.8589 13.0338
+169. Raymond Lifestyle Limited,B1,
+AKVN Growth Center, Kailash
+nagar,Bore gaon Dist-Chhindwara,
+Madhya Pradesh
+TXTOE169MP 4446 15.3324 15.1861 14.2819
+170. Nandan Denim Pvt Ltd (Plant)
+Survey No. 198/1 and 203/2,
+Saijpur-Gopalpur, Pirana
+road,Ahmedabad
+Gujarat-380007
+TXTOE170GJ 14323 16.5986 16.4402 15.4614
+171. GM Fabrics Pvt. Ltd.,F-2, Tarapur
+MIDC,Boisar,Palghar
+Maharashtra,401506
+TXTOE171MH 1744 16.6943 16.5350 15.5505
+172. Arvind Ltd.,PO-Khatraj, Tal-Kalol,
+Dist-Gandhinagar, 382721, Gujarat
+TXTOE172GJ 37761 16.7463 16.5865 15.5990
+173. Mafatlal Industries Limited Textile
+Division, Nadiad Unit,PB No-#55,
+Kapadvanj Road, Nadiad, 387001,
+Gujarat
+TXTOE173GJ 6194 17.4268 17.2605 16.2329
+3. In the principal rules,
+i. in Note 2, for the words "The greenhouse gases emission intensity targets", the words "For
+the First Schedule the greenhouse gases emission intensity targets," shall be substituted.
+ii. after Note 2 the following Note shall be inserted :
+"Note 3: For the Second Schedule, the greenhouse gases emission intensity targets for the year 2025-
+26 have been calculated based on the pro rata target for the remaining months i.e. from January 2026
+to March 2026. The target for 2026-27 have been calculated based on the revised 2025-26 target,
+maintaining the same reduction percentage as obligated entity should have received if it was notified
+for FY 2025-26".
+[F. No. 12/111/2025-HSM]
+RAJAT AGARWAL, Jt. Secy.
+Note: The Greenhouse Gases Emission Intensity Target Rules, 2025 were published in the Gazette of India,
+Extraordinary, Part ll, Section 3, Sub-section (i) vide number G.S.R. 739(E), dated the 8th October,
+2025.
+Uploaded by Dte. of Printing at Government of India Press, Ring Road, Mayapuri, New Delhi-110064
+and Published by the Controller of Publications, Delhi-110054. GORAKHA NATH YADAVA
+Digitally signed by GORAKHA NATH
+YADAVA
+Date: 2026.01.16 13:08:33 +05'30'
+
