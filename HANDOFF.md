@@ -4,7 +4,7 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 
 ## What this is
 
-**Cut or Buy** helps a cement plant with a legal carbon limit decide between cutting emissions, buying carbon credits, or locking in a price early, under an unknown credit price. Approved topic title: *"Cut or Buy: A Decision Tool for Cement Plants Facing Legal Carbon Limits"*.
+**Cut or Buy** helps a cement plant with a legal carbon limit compare three ways to cover its gap: cut it all with abatements, buy all the credits, or use abatements first and buy credits for the rest, at a credit price the user chooses. Approved topic title: *"Cut or Buy: A Decision Tool for Cement Plants Facing Legal Carbon Limits"*.
 
 - Live: https://compliance-desk-lovat.vercel.app (the web address still says `compliance-desk` because that is the Vercel project name)
 - Code: https://github.com/ML7-nex/compliance-desk (branch `main`; Vercel redeploys on every push)
@@ -15,7 +15,7 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 - **Cement only.** `FOCUS_SECTOR` in `lib/brand.ts`. Cement is 43% of required cuts (7.18 of 16.7 Mt), the only sector with published abatement costs (CEEW 2023), and our totals match an independent report. All 490 notified plants stay in `data/entities.json`; `allEntities` has all, `entities` is cement only.
 - **"Notified" plants, not every plant.** The law covers 186 notified cement entities (131 integrated `CMT…`, 55 grinding units `CGU…`). Never say "every Indian cement plant".
 - **Vocabulary:** no "CFO", "compliance" or the scheme's full name in the UI, deck or AI prompt. The scheme name appears only in citations. Brand name lives in `lib/brand.ts` (`BRAND`).
-- **AI explains, the simulation decides.** Gemini only phrases numbers computed by the engine; a checker (`untraceableNumbers` in `lib/brief.ts`) flags any figure it cannot trace, including numbers written as words.
+- **AI explains, the sums decide.** Gemini only phrases numbers computed by the page's own sums (`lib/simple.ts`); a checker (`untraceableNumbers` in `lib/brief.ts`) flags any figure it cannot trace, including numbers written as words.
 - **Honesty over polish:** every lever figure carries a source badge; placeholders are labelled; "not advice" is on every page.
 
 ## Pages
@@ -32,7 +32,7 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 
 - 186 cement entities (131 + 55); required cut by FY27 **7.18 Mt/yr** (ACEEE 2026 reports 7.179 Mt and 186 entities). Cement baseline 264.1 Mt.
 - Upper-bound credit bill if nothing is cut: ₹431 / ₹574 / ₹862 crore a year at ₹600 / 800 / 1,200 per tonne. Median plant cut 28 kt, about ₹2.2 crore at ₹800.
-- Worked example Shree Cement (`CMTOE084RJ`, 247 kt gap, price ₹800, vol 40%): buy-all expected ₹23 cr, bad year ₹40 cr; best plan ₹3.4 cr expected, ₹7 cr bad year. Saving vs buy-all: 85% / 41% / 18% / 0% when 100% / 50% / 25% / 0% of the modelled cheap headroom remains. **Illustrative: depends on lever potentials, which are placeholders.**
+- Worked example Shree Cement (`CMTOE084RJ`, gap 246.7 kt, credit price Rs 800): buy all the credits Rs 19.7 crore; cut the whole gap with abatements Rs 4.34 crore (uses renewable power at Rs 1,760 a tonne for the last 24.7 kt); abatements first then buy the rest Rs 1.97 crore (three Rs 0 abatements cover 222 kt, buy 24.7 kt). Saving of the third against the first, by how much cheap abatement the plant still has: 90% / 45% / 22% / 0% at 100% / 50% / 25% / 0%. **Illustrative: depends on placeholder abatement sizes.**
 - Pricing hypothesis (untested): ₹2–5 lakh per plant per year, about ₹4–9 crore a year across 186 plants.
 
 ## Sources (what each supports)
@@ -50,18 +50,18 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 - Many cement plants have no FY26 target (printed "-"); treated as no FY26 obligation.
 - Extraction scripts: `tools/parse_oct_gazette.py`, `tools/parse_jan_gazette.py`, `tools/reparse_names.py`. They were run from the parent `cc_demo/data` folder (inputs `raw/raw.txt`, `raw/jan_raw.txt` made with `pdftotext -raw`; copies in `data/source/raw/`). Original PDFs are in `cc_demo/data/raw/` outside this repo. Run Python scripts with `python -I`.
 
-## Model assumptions (all in `lib/engine`)
+## The sums (all in `lib/simple.ts`; costs and sizes in `lib/abatements.ts`)
 
-Shortfall = output × (unabated intensity − target) − abatement. Price is log-normal with mean = slider, FY27 mean = 1.125 × FY26, vol FY26 = 0.9 × slider, correlation 0.8. Lever cost paid on planned tonnes; delivery random (truncated normal). Hedge = share of expected net shortfall at forward price (+3%). Penalty cap = 2 × mean price. FY26 surplus banked into FY27 (or sold at a 10% haircut). 10% discount. 10,000 paths (4,000 if more than 5 levers). Optimiser: exhaustive search over lever subsets × hedge {0, .25, .5, .75, 1} minimising E[cost] + λ·CVaR95 (λ = 0, 0.5, 2 for the caution buttons). Fixed seed 2026, so results reproduce.
-**Not modelled:** price linked to market balance, continuous lever sizing, banking limits, official floor/ceiling.
-**Lever potentials are placeholders** (share of the plant's FY27 gap; `lib/engine/defaults.ts`). The plant must supply real headroom: this is the biggest sensitivity.
+Gap = output x (CO2 per tonne now minus FY27 target). Buy all = gap x price. Cut it all with abatements = cheapest first, no credits (shown as not possible if the listed abatements are too small). Abatements first, buy the rest = only abatements cheaper per tonne than a credit, then credits for the remainder. The cheapest possible option is flagged. A table repeats the costs at Rs 600, 800 and 1,200.
+**Removed on purpose (3 Nov 2026, to keep it explainable and assumption-light):** the 10,000-future price simulation, lock-in/forward purchase, caution settings, bad-year numbers, volatility, delivery randomness, ramp-up, banking, discounting and the penalty cap. All of that is in git history at commit 1ebed53 and earlier if needed.
+**Remaining assumptions:** the credit price (the user's choice; analysts expect Rs 600 to 1,200), abatement costs (CEEW 2023; two converted at an assumed Rs 88 per dollar), and **abatement sizes, which are placeholders** (shares of the plant's FY27 gap: 45%, 30%, 15%, 25%, 40%). The plant must supply its real sizes: this is the biggest uncertainty.
 
 ## Run, test, deploy
 
 ```
 npm install
 npm run dev            # http://localhost:3000
-npx vitest run         # 38 tests (golden rupee cases, twin, sources, brief guardrail)
+npx vitest run         # 25 tests (hand-worked cost cases, plant inputs, AI brief guardrail)
 npx tsc --noEmit && npx eslint .
 npm run build
 ```
@@ -74,7 +74,7 @@ npm run build
 - Next 16: `params` is a Promise; do not call `new Date()` in a client component render (breaks prerender); read `node_modules/next/dist/docs/` before relying on old patterns.
 - `vitest` needs `@types/node` 24+; plain `npm install` must succeed or Vercel fails.
 - OneDrive locks `.next`: kill running servers and `rm -rf .next` before rebuilding.
-- Simulation loads client-side only (`components/LabLoader.tsx`), which keeps the build near 30 s.
+- The Lab loads client-side only (`components/LabLoader.tsx`), which keeps the build fast.
 - Edge headless can screenshot pages (`msedge --headless --screenshot`); PowerPoint COM can render the deck (LibreOffice and pdftoppm are not installed).
 
 ## Deck

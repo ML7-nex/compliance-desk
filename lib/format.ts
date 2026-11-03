@@ -2,7 +2,7 @@
 export function money(x: number): string {
   const sign = x < 0 ? "−" : "";
   const a = Math.abs(x);
-  if (a >= 1e7) return `${sign}₹${(a / 1e7).toLocaleString("en-IN", { maximumFractionDigits: a >= 1e8 ? 0 : 1 })} cr`;
+  if (a >= 1e7) return `${sign}₹${(a / 1e7).toLocaleString("en-IN", { maximumFractionDigits: a >= 1e8 ? 1 : 2 })} cr`;
   if (a >= 1e5) return `${sign}₹${(a / 1e5).toLocaleString("en-IN", { maximumFractionDigits: 1 })} lakh`;
   return `${sign}₹${Math.round(a).toLocaleString("en-IN")}`;
 }

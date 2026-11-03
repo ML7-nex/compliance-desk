@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import type { EntityRow } from "@/lib/entities";
 
-// The simulation runs in the browser, so skip rendering it on the server (faster builds, instant shell).
+// The sums run in the browser, so skip rendering this on the server (faster builds, instant shell).
 const LabClient = dynamic(() => import("@/components/LabClient"), {
   ssr: false,
   loading: () => (

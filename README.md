@@ -7,10 +7,8 @@ Strategy Lab that prices abatement, spot buying and forward cover under an uncer
 
 - **Cement Atlas** (`/`): 186 cement entities from the MoEFCC gazette (G.S.R. 739(E), 8 Oct 2025). The data file also holds the other 304 notified plants (G.S.R. 25(E) and other sectors); the app is scoped to cement by `FOCUS_SECTOR` in `lib/brand.ts`.
   Baseline, FY26 and FY27 targets, implied tonnes to cut, peer comparison.
-- **Strategy Lab** (`/lab/<registration no.>`): a seeded Monte Carlo engine (`lib/engine`) with a rules config,
-  an exhaustive optimiser (expected cost + λ·CVaR95), an editable plant twin, abatement cost curve, price ranges,
-  sensitivity tornado, CSV export and print view.
-- **AI brief** (`/api/brief`): Gemini phrases numbers the engine computed. A checker flags any figure it cannot trace.
+- **Strategy Lab** (`/lab/<registration no.>`): plain sums, no simulation. Shows the gap, then what it costs to (1) buy all the credits, (2) cut the whole gap with abatements, (3) use abatements that cost less than a credit and buy credits for the rest, at a credit price the user chooses (plus a table at Rs 600, 800 and 1,200). Plants can enter their own numbers; CSV export and print view.
+- **AI brief** (`/api/brief`): Gemini phrases numbers the page's sums computed. A checker flags any figure it cannot trace.
 
 ## Data and honesty
 
@@ -33,13 +31,16 @@ Strategy Lab that prices abatement, spot buying and forward cover under an uncer
 ```
 npm install
 npm run dev          # http://localhost:3000
-npm test             # golden scenarios, reproducibility, plant twin, AI guardrail
+npm test             # hand-worked cost cases, plant inputs, AI guardrail
 ```
 
 For the AI brief set `GEMINI_API_KEY` (and optionally `GEMINI_MODEL`) in `.env.local` locally and in
 Vercel project settings. See `.env.example`. Never commit keys.
 
-## Engine notes
+## How the sums work
 
-Same inputs and seed give the same result. Lever cost is paid on planned tonnes; abatement delivered is uncertain.
-Hedge covers a share of expected net shortfall at a forward price. Penalty cap is `penaltyMultiple × mean price`.
+- Gap = output x (CO2 per tonne now minus the FY27 target).
+- Buy all = gap x credit price.
+- Cut it all with abatements = use abatements cheapest first until the gap is covered (no credits).
+- Abatements first, buy the rest = use only abatements that cost less per tonne than a credit, then buy credits for what is left.
+- No randomness, discounting, banking or advance purchase. The earlier Monte Carlo version (10,000 simulated prices, lock-in, caution settings) is in git history at commit 1ebed53 and earlier.

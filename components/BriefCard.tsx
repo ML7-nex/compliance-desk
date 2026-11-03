@@ -3,16 +3,16 @@ import { useState } from "react";
 
 type State = { status: "idle" | "loading" | "done" | "error"; text?: string; untraceable?: string[]; error?: string; model?: string; forKey?: string };
 
-export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: string; price: number; vol: number; lambda: number; twin?: unknown }) {
+export default function BriefCard({ reg, price, inputs }: { reg: string; price: number; inputs?: unknown }) {
   const [s, setS] = useState<State>({ status: "idle" });
-  const currentKey = JSON.stringify({ reg, price, vol, lambda, twin });
+  const currentKey = JSON.stringify({ reg, price, inputs });
   const stale = s.status === "done" && s.forKey !== currentKey;
 
   async function generate() {
     setS({ status: "loading" });
     const forKey = currentKey;
     try {
-      const r = await fetch("/api/brief", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reg, price, vol, lambda, twin }) });
+      const r = await fetch("/api/brief", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reg, price, inputs }) });
       const j = await r.json();
       if (!r.ok) setS({ status: "error", error: j.error ?? "Something went wrong." });
       else setS({ status: "done", text: j.text, untraceable: j.untraceable, model: j.model, forKey });
@@ -32,7 +32,7 @@ export default function BriefCard({ reg, price, vol, lambda, twin }: { reg: stri
           {s.status === "loading" ? "Writing…" : s.status === "done" ? "Regenerate" : "Generate plain-English brief"}
         </button>
       </div>
-      <p className="mt-2 text-xs text-muted">The simulation computes every number. The AI only phrases them for your current inputs, and a checker flags any figure it cannot trace. Clicking the button sends your current figures to our server and to Google&apos;s Gemini service; nothing is stored by us.</p>
+      <p className="mt-2 text-xs text-muted">The page computes every number with simple sums. The AI only phrases them for your current inputs, and a checker flags any figure it cannot trace. Clicking the button sends your current figures to our server and to Google&apos;s Gemini service; nothing is stored by us.</p>
       {s.status === "error" && <p role="alert" className="mt-3 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger">{s.error}</p>}
       {s.status === "done" && (
         <div className="mt-4">

@@ -24,7 +24,7 @@ export default function Home() {
             Every notified cement plant&apos;s legal carbon target, <span className="text-accent">in one place.</span>
           </h1>
           <p className="rise mt-5 max-w-2xl text-lg text-muted" style={{ animationDelay: "120ms" }}>
-            Search all {entities.length} notified cement plants, see how hard each target bites, then price your options for meeting it: cut emissions, buy credits, or lock in a price.
+            Search all {entities.length} notified cement plants, see how hard each target bites, then see what it costs to meet it: cut emissions yourself, buy credits, or a mix.
           </p>
           <div className="rise mt-7 flex flex-wrap gap-3" style={{ animationDelay: "150ms" }}>
             <a href="#atlas" className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accentink transition hover:brightness-110">Browse the atlas</a>

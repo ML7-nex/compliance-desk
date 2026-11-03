@@ -1,229 +1,171 @@
 "use client";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { EntityRow } from "@/lib/entities";
-import { kt, pct } from "@/lib/entities";
-import { computeLab } from "@/lib/lab";
-import { tornado } from "@/lib/sensitivity";
+import { pct } from "@/lib/entities";
+import { PRICE_TABLE, computeOptions, defaultInputs, priceRows, sanitizeInputs, type Option, type PlantInputs } from "@/lib/simple";
 import { buildCsv } from "@/lib/export";
 import { money, ktText } from "@/lib/format";
-import { defaultTwin, sanitizeTwin, type TwinState } from "@/lib/twin";
 import BriefCard from "@/components/BriefCard";
-import TwinForm from "@/components/TwinForm";
-import CostCurve from "@/components/CostCurve";
-import PriceBands from "@/components/PriceBands";
-import Tornado from "@/components/Tornado";
+import SimpleForm from "@/components/SimpleForm";
+import SimpleCostCurve from "@/components/SimpleCostCurve";
 import Collapsible from "@/components/Collapsible";
 
-// One colour per option, colour-blind safe (Okabe–Ito).
-const COLORS = ["#8b98aa", "#56B4E9", "#E69F00", "#3ddc97"];
-const CAUTION = [
-  { label: "Lowest average cost", lambda: 0 },
-  { label: "Balanced", lambda: 0.5 },
-  { label: "Play it safe", lambda: 2 },
-];
+const DOT: Record<string, string> = { buy: "#8b98aa", abate: "#E69F00", mix: "#3ddc97" };
 
-function LazyTornado({ entity, inputs, twin, plan }: { entity: EntityRow; inputs: { price: number; vol: number; lambda: number }; twin: TwinState; plan: Parameters<typeof tornado>[3] }) {
-  const sens = useMemo(() => tornado(entity, inputs, twin, plan), [entity, inputs, twin, plan]);
-  return <Tornado base={sens.base} bars={sens.bars} />;
+function describe(o: Option, gapT: number): string {
+  const names = (o.uses.length ? o.uses.map((u) => `${u.name} (${ktText(u.tonnes)} at ₹${Math.round(u.costPerTonne).toLocaleString("en-IN")} a tonne)`).join(", ") : "none");
+  if (o.key === "buy") return `Do nothing yourself and buy credits for the whole gap: ${ktText(gapT)}.`;
+  if (o.key === "abate") return o.possible
+    ? `Cut the whole gap yourself, cheapest first, using: ${names}. Buy no credits.`
+    : `Not possible with the abatements listed: they can cut only ${ktText(gapT - o.uncoveredT)} of the ${ktText(gapT)} gap.`;
+  return o.uses.length
+    ? `Use only the abatements that cost less than a credit: ${names}. Then buy credits for the other ${ktText(o.boughtT)}.`
+    : `No abatement costs less than a credit at this price, so everything is bought: ${ktText(o.boughtT)}.`;
 }
 
 export default function LabClient({ entity }: { entity: EntityRow }) {
-  const def = useMemo(() => defaultTwin(entity), [entity]);
+  const def = useMemo(() => defaultInputs(entity), [entity]);
   const [price, setPrice] = useState(800);
-  const [vol, setVol] = useState(0.4);
-  const [lambda, setLambda] = useState(0.5);
-  const [twin, setTwin] = useState<TwinState>(def);
-  const key = `twin:${entity.reg}`;
+  const [inputs, setInputs] = useState<PlantInputs>(def);
+  const key = `simple:${entity.reg}`;
 
   // Restore this plant's saved inputs from the browser (storage can be blocked, so never rely on it).
   useEffect(() => {
     try {
       const raw = localStorage.getItem(key);
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (raw) setTwin(sanitizeTwin(JSON.parse(raw), def));
+      if (raw) setInputs(sanitizeInputs(JSON.parse(raw), def));
     } catch { /* storage unavailable: start from defaults */ }
   }, [key, def]);
   useEffect(() => {
-    try { localStorage.setItem(key, JSON.stringify(twin)); } catch { /* ignore */ }
-  }, [key, twin]);
+    try { localStorage.setItem(key, JSON.stringify(inputs)); } catch { /* ignore */ }
+  }, [key, inputs]);
 
-  const inputs = useDeferredValue({ price, vol, lambda });
-  const deferredTwin = useDeferredValue(twin);
-  const stale = inputs.price !== price || inputs.vol !== vol || inputs.lambda !== lambda || deferredTwin !== twin;
-  const result = useMemo(() => computeLab(entity, inputs, deferredTwin), [entity, inputs, deferredTwin]);
-
-  const hasLevers = result.s.levers.length > 0;
-  const names = hasLevers
-    ? ["Buy all credits on the market", "Do the cheap fixes, buy the rest", "Cheap fixes + lock in half the price", "Best plan for your caution level"]
-    : ["Buy all credits on the market", "Lock in half the price in advance", "Lock in all of it in advance", "Best plan for your caution level"];
-  const [spot, , , opt] = result.strategies;
-  const maxBad = Math.max(...result.strategies.map((x) => x.e.stats.p95), 1);
-  const saving = spot.e.stats.mean - opt.e.stats.mean;
-  const badSaving = spot.e.stats.p95 - opt.e.stats.p95;
-  const leverNames = opt.e.plan.levers.map((id) => result.s.levers.find((l) => l.id === id)?.name ?? id);
-  const others = result.strategies.slice(0, 3).map((x, i) => ({ i, mean: x.e.stats.mean, bad: x.e.stats.p95 }));
-  const cheapest = others.reduce((m, x) => (x.mean < m.mean ? x : m), others[0]);
-  const cheaperOnAverage = cheapest.mean < opt.e.stats.mean - 1000 && Math.abs(cheapest.bad - opt.e.stats.p95) > 1000 ? cheapest : null;
-  const gap27 = Math.max(0, result.gross[1]);
-  const userLevers = result.s.levers.filter((l) => l.source === "User input").length;
-
-  const all = result.strategies.flatMap((x) => Array.from(x.e.costs));
-  const lo = all.reduce((a, b) => Math.min(a, b), Infinity), hi = all.reduce((a, b) => Math.max(a, b), -Infinity);
-  const bins = 48;
-  const hist = result.strategies.map(({ e }) => {
-    const h = new Array(bins).fill(0);
-    for (const c of e.costs) h[Math.min(bins - 1, Math.floor(((c - lo) / (hi - lo || 1)) * bins))]++;
-    return h;
-  });
-  const hmax = Math.max(...hist.flat(), 1);
-  const W = 680, H = 200, P = 8;
-  const area = (h: number[]) => `M${P},${H} ` + h.map((v, i) => `L${P + (i / (bins - 1)) * (W - 2 * P)},${H - (v / hmax) * (H - 14)}`).join(" ") + ` L${W - P},${H} Z`;
+  const result = useMemo(() => computeOptions(inputs, entity.t27, price), [inputs, entity.t27, price]);
+  const prices = useMemo(() => Array.from(new Set([...PRICE_TABLE, price])).sort((a, b) => a - b), [price]);
+  const rows = useMemo(() => priceRows(inputs, entity.t27, prices), [inputs, entity.t27, prices]);
 
   function download() {
-    const blob = new Blob([buildCsv(entity, inputs, deferredTwin, def, result)], { type: "text/csv;charset=utf-8" });
+    const blob = new Blob([buildCsv(entity, inputs, def, price, result, rows)], { type: "text/csv;charset=utf-8" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `strategy-lab-${entity.reg}.csv`;
+    a.download = `cut-or-buy-${entity.reg}.csv`;
     a.click();
     URL.revokeObjectURL(a.href);
   }
 
+  const userMade = inputs.abatements.length > 0 && inputs.abatements.every((a) => a.source === "User input" || a.edited);
+  const best = result.options.find((o) => o.key === result.bestKey);
+
   return (
-    <div className="mt-6" aria-busy={stale}>
+    <div className="mt-6">
       <div className="hidden print:block">
         <h2 className="text-xl font-semibold">{entity.name}</h2>
-        <p className="text-sm">{entity.reg} · price ₹{price}/t · {CAUTION.find((c) => c.lambda === lambda)?.label}</p>
+        <p className="text-sm">{entity.reg} · credit price assumed ₹{price} a tonne</p>
       </div>
 
-      {/* STEP 1: the gap */}
+      {/* STEP 1 */}
       <section className="card p-5">
-        <div className="eyebrow text-accent">Step 1 · Your gap</div>
+        <div className="eyebrow text-accent">Step 1 · How much must be cut</div>
         <p className="mt-2 text-2xl font-semibold leading-snug">
-          {gap27 > 0
-            ? <>By FY27 this plant has to cut <span className="num text-accent">{pct(entity.cutPct27)}</span> of its emissions intensity, a gap of about <span className="num text-accent">{ktText(gap27)}</span> of CO₂ a year.</>
-            : <>On these inputs the plant already meets its FY27 target, with no gap to close.</>}
+          {result.noGap
+            ? <>On these numbers the plant already meets its FY27 limit, so there is no gap to close.</>
+            : <>By FY27 this plant has to cut <span className="num text-accent">{ktText(result.gapT)}</span> of CO₂ a year, <span className="num text-accent">{pct(entity.cutPct27)}</span> of its emissions per tonne of cement.</>}
         </p>
         <p className="mt-2 text-sm text-muted">
-          Any tonne it does not cut itself must be covered by buying carbon credits, or it pays a penalty of twice the credit price. Nobody knows the credit price yet, so the tool tests thousands of possible prices.
+          The limit comes from the government gazette. Every tonne the plant does not cut itself has to be covered by carbon credits (gazette rule 4(3)).
         </p>
       </section>
 
-      {/* STEP 2: the one assumption that matters + caution */}
+      {/* STEP 2 */}
       <section className="no-print card mt-3 p-5">
-        <div className="eyebrow text-accent">Step 2 · Two choices from you</div>
-        <div className="mt-3 grid gap-5 sm:grid-cols-2">
-          <label className="block">
-            <span className="flex items-baseline justify-between text-sm"><span>What do you expect a credit to cost?</span><span className="num text-lg font-semibold">₹{price} per tonne</span></span>
-            <input type="range" min={200} max={2500} step={50} value={price} onChange={(e) => setPrice(+e.target.value)} className="mt-3 w-full" />
-            <span className="mt-1 block text-xs text-muted">Nothing has traded yet. Analysts expect ₹600–1,200 early on; there is no official price.</span>
-          </label>
-          <div>
-            <span className="text-sm">How cautious should the plan be?</span>
-            <div role="group" aria-label="How cautious should the plan be" className="mt-3 flex flex-wrap gap-2">
-              {CAUTION.map((c) => (
-                <button key={c.label} onClick={() => setLambda(c.lambda)} aria-pressed={lambda === c.lambda}
-                  className={`rounded-lg border px-3 py-2 text-sm font-medium transition ${lambda === c.lambda ? "border-accent bg-accent text-accentink" : "border-line text-muted hover:text-ink"}`}>{c.label}</button>
-              ))}
-            </div>
-            <span className="mt-2 block text-xs text-muted">&ldquo;Play it safe&rdquo; accepts a slightly higher average cost to avoid a very bad year.</span>
-          </div>
-        </div>
+        <div className="eyebrow text-accent">Step 2 · One choice from you</div>
+        <label className="mt-3 block max-w-xl">
+          <span className="flex items-baseline justify-between text-sm"><span>What do you expect one carbon credit to cost?</span><span className="num text-lg font-semibold">₹{price} a tonne</span></span>
+          <input type="range" min={200} max={2500} step={50} value={price} onChange={(e) => setPrice(+e.target.value)} className="mt-3 w-full" />
+          <span className="mt-1 block text-xs text-muted">No credit has traded yet and there is no official price. Analysts expect ₹600 to ₹1,200 early on.</span>
+        </label>
       </section>
 
-      {/* STEP 3: the answer */}
-      <section className={`mt-3 rounded-xl border border-accent/40 bg-accent/10 p-5 transition-opacity ${stale ? "opacity-60" : ""}`}>
-        <div className="eyebrow text-accent">Step 3 · What to do</div>
-        <ul className="mt-3 space-y-2 text-lg leading-snug">
-          {hasLevers && (
-            <li>{leverNames.length > 0
-              ? <>Do these first: <strong>{leverNames.join(", ")}</strong>.</>
-              : <>None of the abatement levers is worth doing at this credit price.</>}</li>
-          )}
-          <li>{opt.e.plan.hedge > 0
-            ? <>Lock in a price in advance for about <strong>{Math.round(opt.e.plan.hedge * 100)}%</strong> of whatever gap remains.</>
-            : <>Buy the remaining credits as you go, with no advance contract.</>}</li>
-          <li>
-            Expected cost <strong className="num">{money(opt.e.stats.mean)}</strong>
-            {saving > 1000 ? <> instead of <span className="num">{money(spot.e.stats.mean)}</span> if you simply bought everything</> : null}.
-            {" "}In a bad year (1 in 20) about <strong className="num">{money(opt.e.stats.p95)}</strong>{badSaving > 1000 ? <> instead of <span className="num">{money(spot.e.stats.p95)}</span></> : null}.
-          </li>
-        </ul>
-        <p className="mt-3 text-xs text-muted">
-          {userLevers === result.s.levers.length && hasLevers ? "Lever figures are your own. " : hasLevers ? "Fix costs come from a published cement study (CEEW 2023); how much each fix can still deliver at your plant is an illustrative placeholder until you enter it. " : ""}
-          Decision support, not advice.
-        </p>
-      </section>
-
-      {/* Compare options */}
-      <section className="card mt-3 p-5" aria-label="Compare your options">
-        <div className="eyebrow">Compare your options</div>
-        <ul className="mt-3 space-y-3">
-          {result.strategies.map(({ e }, i) => (
-            <li key={i} className={`rounded-lg border p-3 ${i === 3 ? "border-accent/50 bg-accent/5" : "border-line"}`}>
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <span className="font-medium"><i className="mr-2 inline-block h-2.5 w-2.5 rounded-sm align-middle" style={{ background: COLORS[i] }} />{names[i]}{i === 3 && <span className="ml-2 rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-accentink">recommended</span>}</span>
-                <span className="num text-sm text-muted">expected <strong className="text-ink">{money(e.stats.mean)}</strong> · bad year <strong className="text-ink">{money(e.stats.p95)}</strong></span>
+      {/* STEP 3 */}
+      <section className="mt-3" aria-label="What it costs">
+        <div className="eyebrow px-1 text-accent">Step 3 · What it costs: three ways to cover the gap</div>
+        <div className="mt-2 grid gap-3 md:grid-cols-3">
+          {result.options.map((o) => {
+            const isBest = o.key === result.bestKey;
+            return (
+              <div key={o.key} className={`rounded-xl border p-4 ${isBest ? "border-accent/60 bg-accent/10" : "border-line bg-surface"}`}>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="flex items-center gap-2 text-sm font-semibold"><i className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: DOT[o.key] }} />{o.name}</span>
+                  {isBest && <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-accentink">cheapest</span>}
+                </div>
+                <div className="num mt-3 text-3xl font-semibold tracking-tight">{o.total == null ? "Not possible" : money(o.total)}</div>
+                <p className="mt-1 text-xs text-muted">a year, at ₹{price} a credit</p>
+                <p className="mt-3 text-sm text-muted">{describe(o, result.gapT)}</p>
               </div>
-              <div className="mt-2 h-1.5 rounded-full bg-surface2"><div className="h-1.5 rounded-full" style={{ width: `${Math.max(2, (e.stats.p95 / maxBad) * 100)}%`, background: COLORS[i] }} /></div>
-            </li>
-          ))}
-        </ul>
-        {cheaperOnAverage && (
-          <p className="mt-3 rounded-lg bg-surface2 p-3 text-sm">
-            Why is the recommended plan not the cheapest on average? &ldquo;{names[cheaperOnAverage.i]}&rdquo; costs {money(opt.e.stats.mean - cheaperOnAverage.mean)} less on average, but its bad year is {money(cheaperOnAverage.bad - opt.e.stats.p95)} {cheaperOnAverage.bad > opt.e.stats.p95 ? "worse" : "better"}. You chose &ldquo;{CAUTION.find((c) => c.lambda === lambda)?.label ?? "Balanced"}&rdquo;, so the plan gives up a little average cost for a safer bad year. Pick &ldquo;Lowest average cost&rdquo; to see the cheapest-on-average plan.
+            );
+          })}
+        </div>
+        {best && best.key !== "buy" && (
+          <p className="mt-3 px-1 text-sm">
+            <strong>Reading it:</strong> an abatement is worth doing when it costs less per tonne than a credit. The cheapest way here is &quot;{best.name.toLowerCase()}&quot;{result.options[0].total != null && best.total != null && result.options[0].total > 0
+              ? <>: it costs {money(best.total)} against {money(result.options[0].total)} for buying everything.</> : "."}
           </p>
         )}
-        <p className="mt-3 text-xs text-muted">The bar shows the bad-year cost. &ldquo;Expected&rdquo; is the average over 10,000 simulated credit-price paths. A bad year is the cost that is exceeded only 1 time in 20.</p>
+        <p className="mt-1 px-1 text-xs text-muted">
+          {userMade ? "Abatement figures are your own. " : "Abatement costs come from a published cement study (CEEW 2023). How much each can still cut at your plant is a placeholder until you enter it. "}Decision support, not advice.
+        </p>
+      </section>
+
+      {/* If the price is different */}
+      <section className="card mt-3 overflow-x-auto p-5">
+        <div className="eyebrow">If the credit price turns out different</div>
+        <p className="mt-1 text-sm text-muted">Nobody knows the price yet, so here are the same three costs at other prices. Cutting with abatements does not depend on the credit price.</p>
+        <table className="num mt-3 w-full min-w-[520px] text-sm">
+          <thead className="text-left text-xs uppercase tracking-wider text-muted">
+            <tr><th className="py-2">Credit price</th><th className="text-right">Buy all the credits</th><th className="text-right">Cut it all with abatements</th><th className="text-right">Abatements first, buy the rest</th></tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.price} className={`border-t border-line ${r.price === price ? "bg-accent/5" : ""}`}>
+                <th scope="row" className="py-2 text-left font-medium">₹{r.price.toLocaleString("en-IN")} a tonne{r.price === price ? " (your choice)" : ""}</th>
+                <td className="text-right">{money(r.buy)}</td>
+                <td className="text-right">{r.abate == null ? "Not possible" : money(r.abate)}</td>
+                <td className="text-right font-semibold">{money(r.mix)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
 
       <div className="no-print">
-        <BriefCard reg={entity.reg} price={price} vol={vol} lambda={lambda} twin={twin} />
+        <BriefCard reg={entity.reg} price={price} inputs={inputs} />
       </div>
 
-      {/* Everything else, one click away */}
       <div className="mt-6 text-sm font-semibold text-muted no-print">Go deeper (optional)</div>
-      <Collapsible title="Adjust to your plant's real numbers" hint="Production, emissions and the cheap-fix potential only you know. Saved in this browser only.">
-        <TwinForm entity={entity} def={def} twin={twin} onChange={setTwin} onReset={() => setTwin(def)} />
-        <div className="px-5 pb-2">
-          <label className="mt-2 block max-w-sm text-sm">
-            <span className="flex justify-between"><span className="text-muted">Price volatility</span><span className="num font-semibold">{(vol * 100).toFixed(0)}%</span></span>
-            <input type="range" min={0.1} max={0.9} step={0.05} value={vol} onChange={(e) => setVol(+e.target.value)} className="mt-2 w-full" />
-          </label>
-        </div>
+      <Collapsible title="Adjust to your plant's real numbers" hint="Your output, your emissions, and how much each abatement can still cut. Saved in this browser only.">
+        <SimpleForm def={def} cur={inputs} onChange={setInputs} onReset={() => setInputs(def)} />
       </Collapsible>
-      <Collapsible title="Which fixes are worth doing?" hint="Each fix as a block: how much it cuts and what it costs per tonne, against the credit price.">
-        <CostCurve s={result.s} shortfall27={gap27} />
-      </Collapsible>
-      <Collapsible title="What could change the answer?" hint="Which assumption moves the expected cost the most.">
-        <LazyTornado entity={entity} inputs={inputs} twin={deferredTwin} plan={result.best.plan} />
-      </Collapsible>
-      <Collapsible title="Credit price scenarios and risk" hint="The range of prices tested, and how the cost of each option is spread out.">
-        <PriceBands d={result.d} meanPrice={result.s.market.meanPrice} />
-        <div className="px-5 pb-3">
-          <svg role="img" aria-label="Distribution of simulated total cost per option" viewBox={`0 0 ${W} ${H + 24}`} className="mt-3 w-full">
-            {hist.map((h, si) => <path key={si} d={area(h)} fill={COLORS[si]} fillOpacity={si === 3 ? 0.35 : 0.1} stroke={COLORS[si]} strokeWidth={si === 3 ? 2.2 : 1.4} />)}
-            <text x={P} y={H + 16} fontSize="11" fill="var(--muted)">{money(lo)}</text>
-            <text x={W - P} y={H + 16} fontSize="11" textAnchor="end" fill="var(--muted)">{money(hi)}</text>
-          </svg>
-          <p className="mt-1 text-xs text-muted">Each curve is one option. The further left and narrower, the cheaper and safer. Green is the recommended plan. Costs are discounted at {(deferredTwin.discountRate * 100).toFixed(0)}%.</p>
-        </div>
+      <Collapsible title="Which abatements are worth doing?" hint="Each abatement as a block: how much it can cut and what it costs per tonne, against the credit price.">
+        <SimpleCostCurve inputs={inputs} gapT={result.gapT} price={price} />
       </Collapsible>
       <Collapsible title="Assumptions and sources" hint="Where every number comes from.">
-        <div className="overflow-x-auto px-5 pb-3">
+        <div className="overflow-x-auto px-5 pb-4 pt-3">
           <table className="num w-full text-sm">
-            <thead className="text-xs uppercase tracking-wider text-muted"><tr className="text-left"><th className="py-2">Fix</th><th className="text-right">Can cut (kt/yr)</th><th className="text-right">₹ per t</th><th className="text-right">Delivery</th><th className="pl-4 text-left">Source</th></tr></thead>
+            <thead className="text-xs uppercase tracking-wider text-muted"><tr className="text-left"><th className="py-2">Abatement</th><th className="text-right">Can cut (kt a year)</th><th className="text-right">₹ per tonne</th><th className="pl-4 text-left">Source</th></tr></thead>
             <tbody>
-              {result.s.levers.length === 0 && <tr className="border-t border-line"><td colSpan={5} className="py-3 text-muted">No abatement levers in this model.</td></tr>}
-              {result.s.levers.map((l) => (
-                <tr key={l.id} className="border-t border-line">
-                  <td className="py-2.5">{l.name}</td><td className="text-right">{(l.potential / 1000).toFixed(1)}</td><td className="text-right">{l.costPerTonne}</td>
-                  <td className="text-right">{(l.deliveryMean * 100).toFixed(0)}% ± {(l.deliverySd * 100).toFixed(0)}</td>
-                  <td className="pl-4"><span title={l.source} className={`rounded-full border px-2 py-0.5 text-[11px] ${l.source === "User input" ? "border-accent text-accent" : l.source.startsWith("CEEW") ? "border-blue text-blue" : "border-warn/40 text-warn"}`}>{l.source === "User input" ? "your input" : l.source.startsWith("CEEW") ? "CEEW 2023" : "assumption"}</span></td>
+              {inputs.abatements.length === 0 && <tr className="border-t border-line"><td colSpan={4} className="py-3 text-muted">No abatements in this model.</td></tr>}
+              {inputs.abatements.map((a) => (
+                <tr key={a.id} className={`border-t border-line ${a.enabled ? "" : "opacity-50"}`}>
+                  <td className="py-2.5">{a.name}{a.enabled ? "" : " (off)"}</td><td className="text-right">{a.potentialKt.toFixed(1)}</td><td className="text-right">{Math.round(a.costPerTonne).toLocaleString("en-IN")}</td>
+                  <td className="pl-4"><span title={a.source} className={`rounded-full border px-2 py-0.5 text-[11px] ${a.edited || a.custom ? "border-accent text-accent" : "border-blue text-blue"}`}>{a.edited || a.custom ? "your input" : "CEEW 2023"}</span></td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="mt-3 text-xs text-muted">Targets: gazette. Fix costs: CEEW (2023), converted at ₹88/USD (hover a badge for the full note); how much each can still deliver is illustrative. Price and volatility are assumptions. Banking of FY26 surplus into FY27 is {deferredTwin.banking ? "on (allowed under current rules per secondary sources)" : "switched off"}; borrowing from future years is not allowed. Penalty = 2× the average credit price.</p>
+          <p className="mt-3 text-xs text-muted">
+            Limit and baseline: MoEFCC gazette G.S.R. 739(E), 8 Oct 2025. Abatement costs: CEEW (2023); two are converted from dollars at an assumed ₹88 per dollar (hover a badge for the full note). How much each abatement can cut at your plant is a placeholder. The credit price is your choice; analysts expect ₹600 to ₹1,200 and there is no official price.
+          </p>
         </div>
       </Collapsible>
 
@@ -231,7 +173,6 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
         <button onClick={download} className="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accentink transition hover:brightness-110">Download numbers and sources (CSV)</button>
         <button onClick={() => window.print()} className="rounded-lg border border-line px-4 py-2.5 text-sm font-semibold transition hover:border-accent hover:text-accent">Print / save as PDF</button>
       </div>
-      <p className="hidden print:block mt-3 text-xs">Plant: {kt(entity.cut27)} to cut by FY27. Decision support, not advice.</p>
     </div>
   );
 }
