@@ -25,12 +25,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </svg>
               {BRAND}
             </Link>
-            <nav className="flex items-center gap-5 text-sm text-muted">
+            <nav className="flex items-center gap-3 text-sm text-muted sm:gap-5">
               <Link href="/" className="hover:text-ink">Atlas</Link>
               <Link href="/lab" className="hover:text-ink">Strategy Lab</Link>
               <Link href="/impact" className="hover:text-ink">Impact</Link>
-              <Link href="/#method" className="hover:text-ink">Method</Link>
-              <span className="rounded-full border border-line px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">Beta</span>
+              <Link href="/#method" className="hidden hover:text-ink sm:inline">Method</Link>
+              <span className="hidden rounded-full border border-line px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent sm:inline">Beta</span>
             </nav>
           </div>
         </header>
