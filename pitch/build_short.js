@@ -5,7 +5,7 @@ const sharp = require("sharp");
 const fa = require("react-icons/fa");
 const path = require("path");
 
-const OUT = path.join(__dirname, "..", "..", "Cut or Buy Short Deck v2.pptx");
+const OUT = path.join(__dirname, "..", "..", "Cut or Buy Short Deck v3.pptx");
 const GREEN = "0E9F6E", MINT = "3DDC97", NAVY = "0B1220", INK = "111827", MUTED = "5B6776", LINE = "E3E8EF", PALE = "B6C2D4", AMBER = "E69F00", BLUE = "1F6FCB";
 
 async function icon(Icon, color, size = 256) {
@@ -117,6 +117,45 @@ async function icon(Icon, color, size = 256) {
   }
   s.addNotes("If asked why only cement: (1) it carries 43 percent of the required cuts; (2) it is the only sector where I found a published abatement cost study, so we are not inventing costs; (3) it is hard to abate, so the cut-versus-buy trade-off is real; (4) one clear intensity number. All 490 notified plants are in our data; other sectors would need sourced cost figures first. Be honest that the size of each abatement at a given plant is a placeholder until the plant enters its own.");
 
+  // 4b. The simulation
+  s = light("Nobody knows the credit price, so the tool tries 10,000 of them");
+  const how = [
+    ["1", "You set two things", "The price you expect (₹800) and how much it can swing in a year, the volatility (30%)."],
+    ["2", "We try 10,000 prices", "Around ₹800, mostly between about ₹465 and ₹1,270. Prices can swing up or down, never below zero."],
+    ["3", "Same sums, every price", "For each price we work out the three costs and report the average, a good year and a bad year."],
+  ];
+  for (let i = 0; i < 3; i++) {
+    const y = 1.4 + i * 1.12;
+    card(s, 0.5, y, 3.9, 1.0);
+    s.addShape(pres.shapes.OVAL, { x: 0.65, y: y + 0.3, w: 0.4, h: 0.4, fill: { color: GREEN }, line: { color: GREEN, width: 0 } });
+    s.addText(how[i][0], { x: 0.65, y: y + 0.3, w: 0.4, h: 0.4, fontSize: 14, bold: true, color: "FFFFFF", align: "center", valign: "middle", margin: 0 });
+    s.addText(how[i][1], { x: 1.2, y: y + 0.08, w: 3.1, h: 0.3, fontSize: 13, bold: true, color: INK, margin: 0 });
+    s.addText(how[i][2], { x: 1.2, y: y + 0.38, w: 3.1, h: 0.58, fontSize: 10.5, color: MUTED, valign: "top", margin: 0 });
+  }
+  card(s, 4.6, 1.4, 4.9, 3.2);
+  s.addText("Shree Cement, expected price ₹800, volatility 30%", { x: 4.8, y: 1.48, w: 4.5, h: 0.3, fontSize: 12, bold: true, color: INK, margin: 0 });
+  const hdr = (t, x, w, al) => s.addText(t, { x, y: 1.85, w, h: 0.28, fontSize: 10, bold: true, color: MUTED, align: al, margin: 0 });
+  hdr("", 4.8, 1.8, "left"); hdr("Average", 6.55, 0.9, "right"); hdr("Good year", 7.5, 0.95, "right"); hdr("Bad year", 8.5, 0.85, "right");
+  const sim = [
+    ["Buy all the credits", "₹19.8 cr", "₹11.5 cr", "₹31.3 cr", "8B98AA", false],
+    ["Cut it all with abatements", "₹16.6 cr", "₹16.6 cr", "₹16.6 cr", AMBER, false],
+    ["Abatements first, buy the rest", "₹13.5 cr", "₹10.7 cr", "₹15.3 cr", GREEN, true],
+  ];
+  for (let i = 0; i < 3; i++) {
+    const y = 2.2 + i * 0.72;
+    s.addShape(pres.shapes.LINE, { x: 4.8, y, w: 4.5, h: 0, line: { color: LINE, width: 0.75 } });
+    s.addShape(pres.shapes.RECTANGLE, { x: 4.8, y: y + 0.27, w: 0.12, h: 0.12, fill: { color: sim[i][4] }, line: { color: sim[i][4], width: 0 } });
+    s.addText(sim[i][0], { x: 5.0, y: y + 0.05, w: 1.55, h: 0.6, fontSize: 10.5, bold: true, color: INK, valign: "middle", margin: 0 });
+    const b = sim[i][5];
+    s.addText(sim[i][1], { x: 6.55, y, w: 0.9, h: 0.7, fontSize: 12, bold: true, color: b ? GREEN : INK, align: "right", valign: "middle", margin: 0 });
+    s.addText(sim[i][2], { x: 7.5, y, w: 0.95, h: 0.7, fontSize: 12, color: INK, align: "right", valign: "middle", margin: 0 });
+    s.addText(sim[i][3], { x: 8.5, y, w: 0.85, h: 0.7, fontSize: 12, bold: b, color: b ? GREEN : INK, align: "right", valign: "middle", margin: 0 });
+  }
+  s.addText("Good year = best 1 in 20 prices. Bad year = worst 1 in 20.", { x: 4.8, y: 4.35, w: 4.5, h: 0.22, fontSize: 9.5, italic: true, color: MUTED, margin: 0 });
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 4.75, w: 9, h: 0.42, fill: { color: "E6F6EF" }, line: { color: "E6F6EF", width: 0 } });
+  s.addText("If the price spikes, buying everything can cost ₹31 cr. Abatements first caps it near ₹15 cr.", { x: 0.7, y: 4.75, w: 8.6, h: 0.42, fontSize: 13, bold: true, color: INK, valign: "middle", margin: 0 });
+  s.addNotes("This is the simulation. Two inputs, both the plant's assumptions: the expected credit price and the volatility, meaning how much the price can swing in a year. No credit has traded yet, so there is no price history to measure volatility from; 30 percent is a starting guess the user can change. The tool then draws 10,000 prices around the expected one (a price can swing up or down but never below zero) and runs the same three sums for each. Good year is the best 1 in 20, bad year the worst 1 in 20. Key message: buying credits swings with the price; cutting with abatements does not; abatements first is never dearer than the other two, and its bad year is far lower than buying everything. Numbers are Shree Cement with illustrative abatement costs. Results are repeatable because the random numbers are seeded.");
+
   // 5. The decision + bridge to demo
   s = light("The decision each plant faces, and what the tool shows");
   s.addText("Every tonne above the limit must be cut or covered by a credit. Three ways to cover the gap:", { x: 0.5, y: 1.3, w: 9, h: 0.4, fontSize: 14, color: MUTED, margin: 0 });
@@ -137,7 +176,7 @@ async function icon(Icon, color, size = 256) {
   s.addText("Example: Shree Cement, credit price ₹800 a tonne. Illustrative: abatement costs and sizes are placeholders; every plant enters its own.", { x: 0.5, y: 4.25, w: 9, h: 0.35, fontSize: 11, italic: true, color: MUTED, margin: 0 });
   s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 4.7, w: 9, h: 0.45, fill: { color: GREEN }, line: { color: GREEN, width: 0 } });
   s.addText("Let me show you how it works  →  live demo", { x: 0.5, y: 4.7, w: 9, h: 0.45, fontSize: 15, bold: true, color: "FFFFFF", align: "center", valign: "middle", margin: 0 });
-  s.addNotes("This is the bridge to the demo. The point: the middle option is not always cheapest, and the third is never dearer than the second, because it takes the cheaper of cut-it or buy-a-credit for each tonne. Numbers are Shree Cement at Rs 800: buy all about Rs 19.7 crore, cut all about Rs 16.6 crore, abatements first then buy the rest about Rs 13.8 crore. They rest on placeholder abatement costs (clinker 400, efficiency 600, waste heat 900 per tonne; renewable power 1,760 and alternative fuels 3,696 from CEEW), so say illustrative, it depends on the factory. Then jump to the live site: pick a plant, move the price slider, show the three costs change. NOTE: the live site shows these numbers only after the placeholder change is pushed.");
+  s.addNotes("This is the bridge to the demo. The point: the middle option is not always cheapest, and the third is never dearer than the second, because it takes the cheaper of cut-it or buy-a-credit for each tonne. Numbers are Shree Cement at Rs 800: buy all about Rs 19.7 crore, cut all about Rs 16.6 crore, abatements first then buy the rest about Rs 13.8 crore. They rest on placeholder abatement costs (clinker 400, efficiency 600, waste heat 900 per tonne; renewable power 1,760 and alternative fuels 3,696 from CEEW), so say illustrative, it depends on the factory. Then jump to the live site: pick a plant, move the price slider, show the three costs change, then show the volatility slider.");
 
   await pres.writeFile({ fileName: OUT });
   console.log("wrote", OUT);
