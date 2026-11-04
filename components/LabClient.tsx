@@ -9,6 +9,7 @@ import BriefCard from "@/components/BriefCard";
 import SimpleForm from "@/components/SimpleForm";
 import SimpleCostCurve from "@/components/SimpleCostCurve";
 import Collapsible from "@/components/Collapsible";
+import PriceRange from "@/components/PriceRange";
 
 const DOT: Record<string, string> = { buy: "#8b98aa", abate: "#E69F00", mix: "#3ddc97" };
 
@@ -138,6 +139,8 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
         </table>
       </section>
 
+      <PriceRange inputs={inputs} target27={entity.t27} price={price} />
+
       <div className="no-print">
         <BriefCard reg={entity.reg} price={price} inputs={inputs} />
       </div>
@@ -158,7 +161,7 @@ export default function LabClient({ entity }: { entity: EntityRow }) {
               {inputs.abatements.map((a) => (
                 <tr key={a.id} className={`border-t border-line ${a.enabled ? "" : "opacity-50"}`}>
                   <td className="py-2.5">{a.name}{a.enabled ? "" : " (off)"}</td><td className="text-right">{a.potentialKt.toFixed(1)}</td><td className="text-right">{Math.round(a.costPerTonne).toLocaleString("en-IN")}</td>
-                  <td className="pl-4"><span title={a.source} className={`rounded-full border px-2 py-0.5 text-[11px] ${a.edited || a.custom ? "border-accent text-accent" : "border-blue text-blue"}`}>{a.edited || a.custom ? "your input" : "CEEW 2023"}</span></td>
+                  <td className="pl-4"><span title={a.source} className={`rounded-full border px-2 py-0.5 text-[11px] ${a.edited || a.custom ? "border-accent text-accent" : "border-blue text-blue"}`}>{a.edited || a.custom ? "your input" : a.source.startsWith("Illustrative") ? "illustrative" : "CEEW 2023"}</span></td>
                 </tr>
               ))}
             </tbody>

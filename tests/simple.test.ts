@@ -75,11 +75,11 @@ describe("cement defaults and the plant's own inputs", () => {
     expect(r.gapT / 1000).toBeCloseTo(246.7, 1);
     expect((r.options[0].total as number) / 1e7).toBeCloseTo(19.74, 1);
   });
-  it("at Rs 800 only the three Rs 0 abatements are used in the mix, and the rest is bought", () => {
+  it("at Rs 800 only the two abatements cheaper than a credit are used in the mix, and the rest is bought", () => {
     const r = computeOptions(def, e.t27, 800);
-    expect(r.options[2].uses.map((u) => u.id).sort()).toEqual(["clinker", "efficiency", "whr"]);
-    expect(r.options[2].boughtT / 1000).toBeCloseTo(24.7, 1);
-    expect((r.options[2].total as number) / 1e7).toBeCloseTo(1.97, 1);
+    expect(r.options[2].uses.map((u) => u.id).sort()).toEqual(["clinker", "efficiency"]);
+    expect(r.options[2].boughtT / 1000).toBeCloseTo(61.7, 1);
+    expect((r.options[2].total as number) / 1e7).toBeCloseTo(13.8, 1);
   });
   it("every default abatement cites its source; alternative fuels cost USD 42 x Rs 88", () => {
     for (const a of def.abatements) expect(a.source).toMatch(/CEEW/);

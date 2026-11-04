@@ -10,8 +10,8 @@ describe("AI brief: facts come from the page's own sums", () => {
   it("reproduces the page numbers for Shree Cement at Rs 800", () => {
     expect(f.gap_to_cut_by_fy27_kt).toBeCloseTo(246.7, 1);
     expect(f.buy_all_cost_crore).toBeCloseTo(19.7, 1);
-    expect(f.abatements_first_then_buy_cost_crore).toBeCloseTo(1.97, 2);
-    expect(f.credits_to_buy_in_that_option_kt).toBeCloseTo(24.7, 1);
+    expect(f.abatements_first_then_buy_cost_crore).toBeCloseTo(13.8, 1);
+    expect(f.credits_to_buy_in_that_option_kt).toBeCloseTo(61.7, 1);
     expect(f.cheapest_option).toMatch(/Abatements first/);
     expect(f.cost_at_other_credit_prices).toHaveLength(3);
   });

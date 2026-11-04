@@ -32,14 +32,14 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 
 - 186 cement entities (131 + 55); required cut by FY27 **7.18 Mt/yr** (ACEEE 2026 reports 7.179 Mt and 186 entities). Cement baseline 264.1 Mt.
 - Upper-bound credit bill if nothing is cut: ₹431 / ₹574 / ₹862 crore a year at ₹600 / 800 / 1,200 per tonne. Median plant cut 28 kt, about ₹2.2 crore at ₹800.
-- Worked example Shree Cement (`CMTOE084RJ`, gap 246.7 kt, credit price Rs 800): buy all the credits Rs 19.7 crore; cut the whole gap with abatements Rs 4.34 crore (uses renewable power at Rs 1,760 a tonne for the last 24.7 kt); abatements first then buy the rest Rs 1.97 crore (three Rs 0 abatements cover 222 kt, buy 24.7 kt). Saving of the third against the first, by how much cheap abatement the plant still has: 90% / 45% / 22% / 0% at 100% / 50% / 25% / 0%. **Illustrative: depends on placeholder abatement sizes.**
+- Worked example Shree Cement (`CMTOE084RJ`, gap 246.7 kt, credit price Rs 800): buy all the credits Rs 19.7 crore; cut the whole gap with abatements about Rs 16.6 crore; abatements first then buy the rest about Rs 13.8 crore (clinker Rs 400 and efficiency Rs 600 are cheaper than a credit; waste heat Rs 900 is not, so 61.7 kt is bought). The `/impact` page recomputes the saving by abatement size live. **Illustrative: abatement costs for clinker, efficiency and waste heat are made-up placeholders (3 Nov 2026, user's choice; CEEW only says they pay back), and sizes are placeholders.**
 - Pricing hypothesis (untested): ₹2–5 lakh per plant per year, about ₹4–9 crore a year across 186 plants.
 
 ## Sources (what each supports)
 
 - **Targets and the legal duty:** MoEFCC G.S.R. 739(E), 8 Oct 2025, rules 3(2) and 4 (read in full from the PDF; made under sections 3, 6, 25 of the Environment (Protection) Act 1986). https://egazette.gov.in/WriteReadData/2025/266804.pdf
 - **Independent count and tonnes:** ACEEE, *Decarbonisation in the Indian Cement Industry* (2026). https://aeee.in/wp-content/uploads/2026/07/decarbonisation-in-cement-industry.pdf
-- **Abatement costs:** CEEW, *Evaluating Net-zero for the Indian Cement Industry* (Oct 2023), read from the PDF: 13 negative-cost measures (modelled at ₹0), alternative fuels about USD 42/tCO2, CCS USD 90. Renewable power about USD 20 is **read off a chart (approximate)**. Converted at an **assumed ₹88/USD**.
+- **Abatement costs:** CEEW, *Evaluating Net-zero for the Indian Cement Industry* (Oct 2023), read from the PDF: 13 negative-cost measures (the app now uses illustrative placeholders of Rs 400, 600, 900 per tonne for clinker, efficiency, waste heat, labelled as such), alternative fuels about USD 42/tCO2, CCS USD 90. Renewable power about USD 20 is **read off a chart (approximate)**. Converted at an **assumed ₹88/USD**.
 - **Price range ₹600–1,200/t:** IMPRI (28 Jul 2026) and Reclimatize (7 Apr 2026), unnamed analysts, not official. No CCC had traded and no floor or ceiling existed when checked.
 - **Banking allowed, borrowing not:** Reclimatize (secondary). **Penalty = 2× average CCC price:** BEE detailed procedure per secondary sources, not in the rules text I read. Confirm both in the CERC regulations / BEE procedure.
 
@@ -50,10 +50,11 @@ Read this first when resuming. Last updated 3 Nov 2026, at commit `197dffb`.
 - Many cement plants have no FY26 target (printed "-"); treated as no FY26 obligation.
 - Extraction scripts: `tools/parse_oct_gazette.py`, `tools/parse_jan_gazette.py`, `tools/reparse_names.py`. They were run from the parent `cc_demo/data` folder (inputs `raw/raw.txt`, `raw/jan_raw.txt` made with `pdftotext -raw`; copies in `data/source/raw/`). Original PDFs are in `cc_demo/data/raw/` outside this repo. Run Python scripts with `python -I`.
 
-## The sums (all in `lib/simple.ts`; costs and sizes in `lib/abatements.ts`)
+## The sums (all in `lib/simple.ts`, plus the simulation above; costs and sizes in `lib/abatements.ts`)
 
 Gap = output x (CO2 per tonne now minus FY27 target). Buy all = gap x price. Cut it all with abatements = cheapest first, no credits (shown as not possible if the listed abatements are too small). Abatements first, buy the rest = only abatements cheaper per tonne than a credit, then credits for the remainder. The cheapest possible option is flagged. A table repeats the costs at Rs 600, 800 and 1,200.
-**Removed on purpose (3 Nov 2026, to keep it explainable and assumption-light):** the 10,000-future price simulation, lock-in/forward purchase, caution settings, bad-year numbers, volatility, delivery randomness, ramp-up, banking, discounting and the penalty cap. All of that is in git history at commit 1ebed53 and earlier if needed.
+**Price simulation (`lib/simulate.ts`, `components/PriceRange.tsx`, added 4 Nov 2026):** 10,000 credit prices around the user's expected price, lognormal with the user's volatility (default 30%, slider 0 to 80%; one year; seeded so results repeat; mean kept at the expected price). It runs the same three sums for each price and reports average, good year (best 1 in 20) and bad year (worst 1 in 20). Shree Cement at Rs 800, 30%: buy all average Rs 19.8 cr (good 11.5, bad 31.3); cut it all Rs 16.6 cr (price-proof); abatements first average Rs 13.5 cr (good 10.7, bad 15.3). Volatility is the user's assumption: no credit has traded, so no price history exists to measure it. The AI brief does not use the simulation yet.
+**Removed on purpose (3 Nov 2026):** lock-in/forward purchase, caution settings, delivery randomness, ramp-up, banking, discounting and the penalty cap. All of that, and the older 10,000-future model, is in git history at commit 1ebed53 and earlier if needed.
 **Remaining assumptions:** the credit price (the user's choice; analysts expect Rs 600 to 1,200), abatement costs (CEEW 2023; two converted at an assumed Rs 88 per dollar), and **abatement sizes, which are placeholders** (shares of the plant's FY27 gap: 45%, 30%, 15%, 25%, 40%). The plant must supply its real sizes: this is the biggest uncertainty.
 
 ## Run, test, deploy
@@ -61,7 +62,7 @@ Gap = output x (CO2 per tonne now minus FY27 target). Buy all = gap x price. Cut
 ```
 npm install
 npm run dev            # http://localhost:3000
-npx vitest run         # 25 tests (hand-worked cost cases, plant inputs, AI brief guardrail)
+npx vitest run         # 30 tests (hand-worked cost cases, plant inputs, AI brief guardrail, price simulation)
 npx tsc --noEmit && npx eslint .
 npm run build
 ```
